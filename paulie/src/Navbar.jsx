@@ -1,10 +1,12 @@
+import { useNumberInputStyles } from '@chakra-ui/react';
 import React from 'react';
 import { BrowserRouter, Route, Link} from 'react-router-dom';
-
+import parrot1 from './parrot1.jpg';
 const Navbar = () => {
   return (
     <nav>
-      <ul>
+      <ul className='my--list'>
+        <img src={parrot1} alt={"chirping"} className="navbar--logo" />
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -20,3 +22,7 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+/*
+style={Navbar.logo}
+*/
