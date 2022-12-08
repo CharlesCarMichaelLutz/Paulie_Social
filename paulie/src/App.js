@@ -13,24 +13,17 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout/>}>  
-          <Route 
-          index element={
-          <Home />
+          <Route index element={
+            <Home />
           } />
-          <Route 
-          path="Explore" 
-          element={
-          <Explore />
+          <Route path="Explore" element={
+            <Explore />
           } />
-          <Route 
-          path="Random" 
-          element={
-          <Random />
+          <Route path="Random" element={
+            <Random />
           } />
-          <Route 
-          path="*" 
-          element={
-          <NoPage />
+          <Route path="*" element={
+            <NoPage />
           } />
         </Route>
       </Routes>
