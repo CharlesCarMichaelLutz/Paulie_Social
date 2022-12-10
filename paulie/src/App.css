@@ -5,6 +5,7 @@
 body {
   background-color:lightgreen;
   margin: 0;
+  flex-direction: column;
 }
 
 nav {
