@@ -40,9 +40,14 @@ const Random = () => {
   
   return (
     <div>
-      <h3>Get Random Chirps from your favorite users here</h3>  
-      
+
+      <header className='random--header'>
+        <h3>Get Random Chirps from your favorite users below</h3>  
+      </header>
+
+      <div class="container" className='user--card' onClick={alert}>
         {cards}
+      </div>
     </div>
   )
 
@@ -59,8 +64,6 @@ or
 random chirp generated 
 
 */
-
-
 
 /*
    {

@@ -10,17 +10,14 @@ const UserCard = ({user}) => {
 
   let {username, userhandle, userImage} = user
   return (
-    <div className='user--grid'>
-    <CContainer className='user--cards' >
-        <CCard style={{width: '18rem'}}>
+    <div>
+        <CCard>
           <CCardBody>
             <CCardImage orientation="top" src={userImage} />
             <CCardTitle>{username}</CCardTitle>
             <CCardSubtitle>{userhandle}</CCardSubtitle>
           </CCardBody>
         </CCard>    
-    </CContainer>  
-   
     </div>
   )
 }

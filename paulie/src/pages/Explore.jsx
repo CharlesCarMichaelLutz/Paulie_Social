@@ -70,10 +70,30 @@ const Explore = () => {
   })
 
   return (
-    <>
-      <h3>Explore Chirps of Users from Paulie Social</h3>   
-       {chirpCards}
-    </>
+    <div class="container">
+
+      <header className='explore--header'>
+        <h2>Explore Chirps from Paulie Social</h2>   
+      </header>
+
+      <section className="search--area">
+        <section class="btn-group">
+          <input type="checkbox" class='btn-check' id='btn1' />
+          <label class="btn btn-outline-success" for="btn1">Username</label>
+          <input type="checkbox" class='btn-check' id='btn2' />
+          <label class="btn btn-outline-success" for="btn2">Content</label>
+        </section>
+      
+        <input placeholder=".....explore" type="text" className='form--control'/>
+      </section>
+
+      <main className='main--explore'>
+        <div class='container' className='chirp--card'>   
+          {chirpCards}
+        </div>
+      </main>
+
+    </div>
   )
 }
 

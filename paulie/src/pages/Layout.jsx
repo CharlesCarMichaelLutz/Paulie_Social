@@ -4,10 +4,10 @@ import Navbar from '../Navbar';
 
 const Layout = () => {
   return (
-    <>
-    <Navbar />
-    <Outlet />
-    </>
+    <div class="container-fluid">
+       <Navbar />
+       <Outlet />
+    </div>
   )
 }
 

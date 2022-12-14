@@ -15,7 +15,7 @@ const ChirpCard = ({chirp}) => {
   let {userImage, username, userhandle, chirpcontent, chirpLink, chirpImage, likes, retweets, donations} = chirp
   return (
   <div>
-  <CCard style={{width: '38rem'}}>
+  <CCard style={{width: '45rem'}}>
     <CCardBody>
         <CAvatar src={userImage}/>
         <CCardTitle>{username}</CCardTitle>
@@ -23,7 +23,7 @@ const ChirpCard = ({chirp}) => {
         <CCardText>
           {chirpcontent}
         </CCardText>
-        <CCardImage src={chirpImage} />
+        <CCardImage className ="chirp--image" src={chirpImage} />
     </CCardBody>
         <CCardLink>{chirpLink}</CCardLink>
         <CButtonGroup>
@@ -37,7 +37,3 @@ const ChirpCard = ({chirp}) => {
 }
 
 export default ChirpCard
-
-/*
- <CImage rounded src={chirpImage} width={500} height={500} />
-*/

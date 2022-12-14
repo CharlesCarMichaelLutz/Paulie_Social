@@ -22,7 +22,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-
-/*
-style={Navbar.logo}
-*/
