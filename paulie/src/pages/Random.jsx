@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import UserCard from './UserCard';
 import userImage from '../parrot1.jpg';
+import chirpImage from '../bigparrot.jpg';
+
 
 const Random = () => {
 
@@ -11,7 +13,7 @@ const Random = () => {
       userhandle: '@yeah123',
     },
     {
-      userImage: userImage,
+      userImage: chirpImage,
       username: '$$$Jammin',
       userhandle: '@jammin$$$AK',
     },
@@ -21,7 +23,7 @@ const Random = () => {
       userhandle: '@surfsupbrah',
     },
     {
-      userImage: userImage,
+      userImage: chirpImage,
       username: 'Barstool',
       userhandle: '@sportsbarstool',
     },
@@ -45,7 +47,7 @@ const Random = () => {
         <h3>Get Random Chirps from your favorite users below</h3>  
       </header>
 
-      <div class="container" className='user--card' onClick={alert}>
+      <div class="container" className='user--card' onClick={alert} >
         {cards}
       </div>
     </div>
@@ -54,3 +56,15 @@ const Random = () => {
 }
 
 export default Random;
+
+/*
+
+() => usePopup(chirp)
+
+state
+
+featuredUsers
+
+randomChirps
+
+*/

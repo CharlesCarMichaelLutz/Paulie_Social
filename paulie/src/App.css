@@ -92,13 +92,12 @@ li a:hover {
   background-color: yellowgreen;
  }
 
- .btn-group {
+ .group--radio {
   position:absolute;
   display: flex;
   flex-direction: row;
   top: 350px;
   left: 825px;
-  width: 15%;
  }
 
  .main--explore {
@@ -123,6 +122,7 @@ Cards
   position: absolute;
   top: 25%;
   width: 650px;
+  row-gap: 1rem;
 }
 
 .user--card {

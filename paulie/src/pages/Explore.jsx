@@ -32,7 +32,7 @@ const Explore = () => {
       userImage: userImage,
       username: 'DeFiGravity',
       userhandle: '@78defigravity',
-      chirpcontent: 'This is a really awesome platform!',
+      chirpcontent: 'Bibendum neque egestas congue quisque. Quis lectus nulla at volutpat diam. Amet tellus cras adipiscing enim. Imperdiet massa tincidunt nunc pulvinar sapien. Ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus. Sit amet justo donec enim. ',
       chirpLink: 'www.coingecko.com',
       chirpImage: chirpImage,
       likes: "<3",
@@ -77,10 +77,10 @@ const Explore = () => {
       </header>
 
       <section className="search--area">
-        <section class="btn-group">
-          <input type="checkbox" class='btn-check' id='btn1' />
+        <section class="btn-group" className='group--radio' >
+          <input type="radio" name="btnradio" class='btn-check' id='btn1' checked/>
           <label class="btn btn-outline-success" for="btn1">Username</label>
-          <input type="checkbox" class='btn-check' id='btn2' />
+          <input type="radio" name="btnradio" class='btn-check' id='btn2' checked/>
           <label class="btn btn-outline-success" for="btn2">Content</label>
         </section>
       
@@ -98,3 +98,13 @@ const Explore = () => {
 }
 
 export default Explore;
+
+/*
+
+two pieces of state
+
+users {
+  username || content
+}
+
+*/
