@@ -6,7 +6,7 @@ import { CCardSubtitle } from '@coreui/react';
 import { CCardText } from '@coreui/react';
 import { CCardLink } from '@coreui/react';
 import { CButtonGroup } from '@coreui/react';
-import { CCardImage } from '@coreui/react';
+import { CImage } from '@coreui/react';
 import { CButton } from '@coreui/react';
 import { CAvatar } from '@coreui/react';
 
@@ -15,7 +15,7 @@ const ChirpCard = ({chirp}) => {
   let {userImage, username, userhandle, chirpcontent, chirpLink, chirpImage, likes, retweets, donations} = chirp
   return (
   <div>
-  <CCard style={{width: '45rem'}}>
+  <CCard>
     <CCardBody>
         <CAvatar src={userImage}/>
         <CCardTitle>{username}</CCardTitle>
@@ -23,14 +23,12 @@ const ChirpCard = ({chirp}) => {
         <CCardText>
           {chirpcontent}
         </CCardText>
-        <CCardImage className ="chirp--image" src={chirpImage} />
+        <CImage rounded src={chirpImage} align="center" height={420} width={420} />
     </CCardBody>
-        <CCardLink>{chirpLink}</CCardLink>
-        <CButtonGroup>
+        <CCardLink>{chirpLink}</CCardLink>     
           <CButton>{likes}</CButton>
           <CButton>{retweets}</CButton>
-          <CButton>{donations}</CButton>
-        </CButtonGroup>
+          <CButton>{donations}</CButton>      
   </CCard>
   </div>
   )
