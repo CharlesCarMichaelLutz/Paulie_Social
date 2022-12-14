@@ -66,6 +66,9 @@ random chirp generated
 */
 
 /*
+
+coolnes
+
    {
       userImage: userImage,
       username: 'yeah123',
