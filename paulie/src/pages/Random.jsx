@@ -67,7 +67,7 @@ random chirp generated
 
 /*
 
-coolnes
+coolness sweet
 
    {
       userImage: userImage,
