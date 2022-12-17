@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const ChirpCard = ({chirp}) => {
 
   let {userImage, username, userhandle, chirpcontent, chirpLink, chirpImage, likes, retweets, donations} = chirp
+
   return (
   <div class="card text-white bg-success mb-3">
     <div class="card-body">

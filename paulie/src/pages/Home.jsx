@@ -1,7 +1,8 @@
 import React from 'react';
 import image from '../bigparrot.jpg';
-const Home = () => {
 
+const Home = () => {
+ 
   return (
     <div class="container">
 
@@ -31,3 +32,10 @@ export default Home
 //https://www.imdb.com/title/tt0125454/?ref_=nv_sr_srsg_0
 
 //no pieces of state needed
+
+/**
+ 
+      <Explore chirps={chirps} />
+      <Random chirps={chirps} userCards={userCards} />
+
+ */

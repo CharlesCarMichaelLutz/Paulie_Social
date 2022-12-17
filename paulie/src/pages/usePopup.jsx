@@ -1,16 +1,13 @@
 import React from 'react'
-import ChirpCard from './ChirpCard'
 
-const usePopup = (cards) => {
+const usePopup = (props) => {
 
-  const cards = userCards.map(user => {
-    return(
-      <ChirpCard key={user.username} user={user}/>
-    )
-  })
   return (
-    <div>
-      {user}
+    <div className='popup--box'>
+      <div className='box'>
+        <span className='close--icon' onClick={props.handleClose}>X</span>
+        {props.content}
+      </div>
     </div>
   )
 }
