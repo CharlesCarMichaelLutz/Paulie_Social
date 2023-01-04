@@ -68,6 +68,61 @@ function App() {
       likes: "<3",
       retweets: "Re:",
       donations: "$$"
+    },
+    {
+      userImage: userImage,
+      username: 'sirBanks',
+      userhandle: '@sirBanks',
+      chirpcontent: 'He is an amazing athlete!',
+      chirpLink: 'www.bestathlete.com',
+      chirpImage: chirpImage,
+      likes: "<3",
+      retweets: "Re:",
+      donations: "$$"
+    },
+    {
+      userImage: userImage,
+      username: 'solidityMaster',
+      userhandle: '@soliditymaster11',
+      chirpcontent: 'I am a master at smart contracts',
+      chirpLink: 'www.smartcontract.com',
+      chirpImage: chirpImage,
+      likes: "<3",
+      retweets: "Re:",
+      donations: "$$"
+    },
+    {
+      userImage: userImage,
+      username: 'oceantoocean',
+      userhandle: '@13ocean',
+      chirpcontent: 'atlantic, pacific, indian, arctic',
+      chirpLink: 'www.thefourbodiesofwater.com',
+      chirpImage: chirpImage,
+      likes: "<3",
+      retweets: "Re:",
+      donations: "$$"
+    },
+    {
+      userImage: userImage,
+      username: 'snowAndSki',
+      userhandle: '@snowandski',
+      chirpcontent: 'winter sports are exhilerating',
+      chirpLink: 'www.snowandski.com',
+      chirpImage: chirpImage,
+      likes: "<3",
+      retweets: "Re:",
+      donations: "$$"
+    },
+    {
+      userImage: userImage,
+      username: 'autumnleaves',
+      userhandle: '@autumnleaves17',
+      chirpcontent: 'the leaves fall in autumn',
+      chirpLink: 'www.autumnsubtle.com',
+      chirpImage: chirpImage,
+      likes: "<3",
+      retweets: "Re:",
+      donations: "$$"
     }
   ])
 
