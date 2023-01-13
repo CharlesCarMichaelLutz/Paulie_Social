@@ -24,3 +24,9 @@ C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServe
 C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\theOfficialServer.pdb
 C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\theOfficialServer.genruntimeconfig.cache
 C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\ref\theOfficialServer.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\theOfficialServer.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\theOfficialServer.csproj.CopyComplete
