@@ -109,14 +109,22 @@
 //}
 
 var builder = WebApplication.CreateBuilder(args);
+
+/// <summary>
+/// Setup Services
+/// </summary>
+
 //builder.Services.AddSingleton<TwitterEndpoint>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //string bear = "AAAAAAAAAAAAAAAAAAAAAOt%2FkwEAAAAAI%2B5mBcPilusrbdYW2mG4mjo6hao%3DfvnnDXKiBGfJEdGEC5iF8pHyeB8TnqkqT6TRbQLscifnvSprl3";
 
-
 var app = builder.Build();
+
+/// <summary>
+/// Add Middleware
+/// </summary>
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -127,12 +135,15 @@ app.UseHttpsRedirection();
 
 //app.MapControllers();
 
-
 app.MapGet("/api/data", () => "enter content to query from Twitter");
 
 app.MapGet("/api/user", () => "Random Tweet showcase display");
 
 app.MapGet("/api/randomTweetVIP", () => "it's a beautiful day in the neighborhood");
 
+//app.MapPost("/api/{string:me}", () => "it's a beautiful day in the neighborhood");
 
+/// <summary>
+/// Start the Server 
+/// </summary>
 app.Run();
