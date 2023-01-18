@@ -1,18 +1,19 @@
-﻿namespace theOfficialServer.Data_Source
+﻿using System.Net.Http.Headers;
+using theOfficialServer.Models;
+
+namespace theOfficialServer.Data_Source
 {
-    public class TwitterApi
+    public static class TwitterApi
     {
-        //IEnumerable<Tweets> GetallTweets()
-        //{
-        //    return 
-        //}
-        //IEnumerable<Users> GetallUsers()
-        //{
-        //    return
-        //}
-        //IEnumerable<VIP> GetallVIPS()
-        //{
-        //    return 
-        //}
+        public static HttpClient TwitterClient { get; set; }
+
+        public static void InitializeClient(string authorize)
+        {
+            TwitterClient = new HttpClient();
+            //TwitterClient.DefaultRequestHeaders.Accept.Clear();
+            TwitterClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorize);
+            TwitterClient.BaseAddress = new Uri("https://api.twitter.com/2/");
+            TwitterClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
     }
 }

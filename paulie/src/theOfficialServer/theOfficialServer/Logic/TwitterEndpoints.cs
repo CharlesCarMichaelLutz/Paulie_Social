@@ -1,39 +1,34 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using theOfficialServer.Data_Source;
+using theOfficialServer.Models;
 
 namespace theOfficialServer
 {
     public class TwitterEndpoints
     {
-        public static async Task<string> searchTweets(string authorizeToken)
+        public async Task<string> searchTweets()
         {
-            //string twitterObject = string.Empty;
+            //string url = "tweets/search/recent?query=boston";
 
-            using (var twitterClient = new HttpClient())
+            string url = "tweets/search/recent?query=boston";
+
+            using (HttpResponseMessage response = await TwitterApi.TwitterClient.GetAsync(url))
             {
-                string authorization = authorizeToken;
-
-                twitterClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorization);
-                var myApi = twitterClient.BaseAddress = new Uri("https://api.twitter.com/2/tweets/search/recent?query=music");
-                twitterClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = new HttpResponseMessage();
-                response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
-                string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
+                // return await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("success");
-
                 }
                 else
                 {
-                    Console.WriteLine("fail");
+                    Console.WriteLine("it didn't happen this time best wishes");
                 }
-                return json;
             }
-
+                //response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
+                //string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);              
+                return json;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace theOfficialServer.Models
+﻿using System.Text.Json;
+
+namespace theOfficialServer.Models
 {
     public class Tweets
     {
@@ -11,6 +13,8 @@
         public string GIF { get; set; }
         public int ReTweetCount { get; set; }
         public int LikeCount { get; set; }
+
+        public override string ToString() => JsonSerializer.Serialize<Tweets>(this);
 
     }
 }

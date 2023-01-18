@@ -108,17 +108,25 @@
 //    }
 //}
 
+using System.Text.Json;
+using theOfficialServer;
+using theOfficialServer.Data_Source;
+using theOfficialServer.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 /// <summary>
 /// Setup Services
 /// </summary>
 
-//builder.Services.AddSingleton<TwitterEndpoint>();
+//builder.Services.AddSingleton<TwitterEndpoints>();
+//builder.Services.AddScoped<TwitterEndpoints>();
+string bearer = "AAAAAAAAAAAAAAAAAAAAAOt%2FkwEAAAAAI%2B5mBcPilusrbdYW2mG4mjo6hao%3DfvnnDXKiBGfJEdGEC5iF8pHyeB8TnqkqT6TRbQLscifnvSprl3";
+
+TwitterApi.InitializeClient(bearer);
+builder.Services.AddTransient<TwitterEndpoints>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//string bear = "AAAAAAAAAAAAAAAAAAAAAOt%2FkwEAAAAAI%2B5mBcPilusrbdYW2mG4mjo6hao%3DfvnnDXKiBGfJEdGEC5iF8pHyeB8TnqkqT6TRbQLscifnvSprl3";
 
 var app = builder.Build();
 
@@ -137,7 +145,17 @@ app.UseHttpsRedirection();
 
 app.MapGet("/api/data", () => "enter content to query from Twitter");
 
-app.MapGet("/api/user", () => "Random Tweet showcase display");
+//app.MapGet("/api/user", searchTweetss(string bear) =>
+//{
+//    return Results.Ok(app);
+//});
+
+app.MapGet("/api/user", (context) =>
+{
+    var tweets = app.Services.GetService<TwitterEndpoints>().searchTweets(bear);
+    var json = JsonSerializer.Serialize<IEnumerable<Tweets>>(tweets);
+    return context.Response.WriteAsync(json);
+});
 
 app.MapGet("/api/randomTweetVIP", () => "it's a beautiful day in the neighborhood");
 
