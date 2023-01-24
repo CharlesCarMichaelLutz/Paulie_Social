@@ -30,3 +30,6 @@ C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServe
 C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\theOfficialServer.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\obj\Debug\net6.0\theOfficialServer.csproj.CopyComplete
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\src\theOfficialServer\theOfficialServer\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

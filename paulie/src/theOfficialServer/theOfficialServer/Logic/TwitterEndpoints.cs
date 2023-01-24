@@ -8,9 +8,11 @@ namespace theOfficialServer
 {
     public class TwitterEndpoints
     {
-        public async Task<string> searchTweets()
+        public static async Task<Tweets> SearchTweets()
         {
             //string url = "tweets/search/recent?query=boston";
+
+            //string url = "tweets/search/{id:}";
 
             string url = "tweets/search/recent?query=boston";
 
@@ -20,15 +22,18 @@ namespace theOfficialServer
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("success");
+                    Tweets aTweet = await response.Content.ReadAsAsync<Tweets>();
+                    return aTweet;
                 }
                 else
                 {
-                    Console.WriteLine("it didn't happen this time best wishes");
+                    //Console.WriteLine("it didn't happen this time best wishes");
+                    throw new Exception(response.ReasonPhrase);
                 }
             }
-                //response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
-                //string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);              
-                return json;
+            //response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
+            //string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);              
+            //return json;
         }
     }
 }
