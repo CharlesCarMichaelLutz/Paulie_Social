@@ -6,10 +6,8 @@ namespace theOfficialServer.Data_Source
     public static class TwitterApi
     {
         public static HttpClient TwitterClient { get; set; }
-
         public static void InitializeClient(string authorize)
         {
-            
             using(TwitterClient = new HttpClient())
             {
                 TwitterClient.DefaultRequestHeaders.Accept.Clear();
