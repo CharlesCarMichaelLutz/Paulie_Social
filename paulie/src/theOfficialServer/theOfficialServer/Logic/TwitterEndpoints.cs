@@ -6,34 +6,58 @@ using theOfficialServer.Models;
 
 namespace theOfficialServer
 {
-    public class TwitterEndpoints
+    public class TwitterEndpoints : ITwitterEndpoints
     {
-        public static async Task<Tweets> SearchTweets()
+        // pass in the api keys here
+
+        private readonly HttpClient _httpClient;
+
+        //constructor
+        public TwitterEndpoints(HttpClient httpClient)
         {
-            //string url = "tweets/search/recent?query=boston";
+            _httpClient = httpClient;
+        }
+        //public static async Task<Tweets> SearchTweets()
+        //{
+              // query and paramaters
+        //    //string query = "tweets/search/recent?query=boston";
 
-            //string url = "tweets/search/{id:}";
+        //    //string url = "tweets/search/{id:}";
 
-            string url = "tweets/search/recent?query=boston";
+        //    string url = "tweets/search/recent?query=boston";
 
-            using (HttpResponseMessage response = await TwitterApi.TwitterClient.GetAsync(url))
-            {
-                // return await response.Content.ReadAsStringAsync();
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine("success");
-                    Tweets aTweet = await response.Content.ReadAsAsync<Tweets>();
-                    return aTweet;
-                }
-                else
-                {
-                    //Console.WriteLine("it didn't happen this time best wishes");
-                    throw new Exception(response.ReasonPhrase);
-                }
-            }
-            //response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
-            //string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);              
-            //return json;
+        //    using (HttpResponseMessage response = await TwitterApi.TwitterClient.GetAsync(url))
+        //    {
+        //        // return await response.Content.ReadAsStringAsync();
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            Console.WriteLine("success");
+        //            Tweets aTweet = await response.Content.ReadAsAsync<Tweets>();
+        //            return aTweet;
+        //        }
+        //        else
+        //        {
+        //            //Console.WriteLine("it didn't happen this time best wishes");
+        //            throw new Exception(response.ReasonPhrase);
+        //        }
+        //    }
+        //    //response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
+        //    //string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);              
+        //    //return json;
+        //}
+
+        public async Task<Tweets?> SearchTweetsbyUser(string user)
+        {
+            return
+                await _httpClient.GetFromJsonAsync<Tweets>(
+                    //modified url path goes here
+                    //query sring with fields and expansions
+                    )
+                //endpoint "users/by?usernames={user}"
+        }
+        public interface ITwitterEndpoints
+        {
+           Task<Tweets> SearchTweetsAsync();
         }
     }
 }
