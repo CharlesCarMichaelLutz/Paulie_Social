@@ -7,79 +7,81 @@
 {
     //public class Program
     //{
-       // static void Main(string[] args)
-       // {
-            //string bearerToken = "AAAAAAAAAAAAAAAAAAAAAOt%2FkwEAAAAAI%2B5mBcPilusrbdYW2mG4mjo6hao%3DfvnnDXKiBGfJEdGEC5iF8pHyeB8TnqkqT6TRbQLscifnvSprl3";
-            //TwitterApi.InitializeClient(bearerToken);
+    // static void Main(string[] args)
+    // {
+    //string bearerToken = "AAAAAAAAAAAAAAAAAAAAAOt%2FkwEAAAAAI%2B5mBcPilusrbdYW2mG4mjo6hao%3DfvnnDXKiBGfJEdGEC5iF8pHyeB8TnqkqT6TRbQLscifnvSprl3";
+    //TwitterApi.InitializeClient(bearerToken);
 
-            //var result = TwitterEndpoints.SearchTweets();
+    //var result = TwitterEndpoints.SearchTweets();
 
-            //Console.WriteLine(result);
+    //Console.WriteLine(result);
 
-            //string getTweets = searchTweets(bear).Result;
-            //Console.WriteLine(getTweets);
+    //string getTweets = searchTweets(bear).Result;
+    //Console.WriteLine(getTweets);
 
-            //string getUsers = searchUsers(bear).Result;
-            //Console.WriteLine(getUsers);
-        //}
-        //public static async Task<string> searchTweets(string authorizeToken)
-        //{
-        //    //string twitterObject = string.Empty;
+    //string getUsers = searchUsers(bear).Result;
+    //Console.WriteLine(getUsers);
+    //}
+    //public static async Task<string> searchTweets(string authorizeToken)
+    //{
+    //    //string twitterObject = string.Empty;
 
-        //    using (var twitterClient = new HttpClient())
-        //    {
-        //        string authorization = authorizeToken;
+    //    using (var twitterClient = new HttpClient())
+    //    {
+    //        string authorization = authorizeToken;
 
-        //        twitterClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorization);
-        //        var myApi = twitterClient.BaseAddress = new Uri("https://api.twitter.com/2/tweets/search/recent?query=music");
-        //        twitterClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    //        twitterClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorization);
+    //        var myApi = twitterClient.BaseAddress = new Uri("https://api.twitter.com/2/tweets/search/recent?query=music");
+    //        twitterClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //        HttpResponseMessage response = new HttpResponseMessage();
-        //        response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
-        //        string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+    //        HttpResponseMessage response = new HttpResponseMessage();
+    //        response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
+    //        string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            Console.WriteLine("success");
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("fail");
-        //        }
-        //        return json;
-        //    }
-        //}
-        //public static async Task<string> searchUsers(string authorizeToken)
-        //{
-        //    using (var twitterClient = new HttpClient())
-        //    {
-        //        string authorization = authorizeToken;
+    //        if (response.IsSuccessStatusCode)
+    //        {
+    //            Console.WriteLine("success");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("fail");
+    //        }
+    //        return json;
+    //    }
+    //}
+    //public static async Task<string> searchUsers(string authorizeToken)
+    //{
+    //    using (var twitterClient = new HttpClient())
+    //    {
+    //        string authorization = authorizeToken;
 
-        //        twitterClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorization);
-        //        var myApi = twitterClient.BaseAddress = new Uri("https://api.twitter.com/2/tweets/search/recent?query=nationalparks");
-        //        twitterClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    //        twitterClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorization);
+    //        var myApi = twitterClient.BaseAddress = new Uri("https://api.twitter.com/2/tweets/search/recent?query=nationalparks");
+    //        twitterClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //        HttpResponseMessage response = new HttpResponseMessage();
-        //        response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
-        //        string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+    //        HttpResponseMessage response = new HttpResponseMessage();
+    //        response = await twitterClient.GetAsync(myApi).ConfigureAwait(false);
+    //        string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            Console.WriteLine("success");
+    //        if (response.IsSuccessStatusCode)
+    //        {
+    //            Console.WriteLine("success");
 
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("fail");
-        //        }
-        //        return json;
-        //    }
-        //}
-//    }
-//}
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("fail");
+    //        }
+    //        return json;
+    //    }
+    //}
+    //    }
+    //}
+    using theOfficialServer.Logic;
+    using theOfficialServer.Data_Source;
+    using theOfficialServer.Models;
 
-
-var builder = WebApplication.CreateBuilder(args);
+    var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 /// <summary>
@@ -116,15 +118,14 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+    //app.UseAuthorization();
 
-//app.MapControllers();
+    //app.MapControllers();
 
-app.MapGet("/api/search{id:}", (TwitterEndpoints getTweets) =>
+app.MapGet("/search/{id}", async (string username, TwitterEndpoints getByUsername) =>
 {
-    //var tweets = app.Services.GetService<TwitterEndpoints>.SearchTweets();
-    //var json = JsonSerializer.Serialize<IEnumerable<TwitterEndpoints>>(tweets);
-    return getTweets.Response.WriteAsync(json);
+    await
+    getByUsername.SearchTweetsbyUser(username).ToListAsync();
 });
 
 //app.MapGet("/api/user", searchTweetss(string bear) =>
@@ -132,19 +133,20 @@ app.MapGet("/api/search{id:}", (TwitterEndpoints getTweets) =>
 //    return Results.Ok(app);
 //});
 
-app.MapGet("/api/search/{content:}", searchTweetss (string bear) =>
+app.MapGet("/search/{content}", async (string tweetContext, TwitterEndpoints getByContent) =>
+{
+    await 
+    getByContent.SearchTweetsByContent(tweetContext).ToListAsync();
+    //return Results.Ok(app);
+});
+
+app.MapGet("/randomVIP", searchTweetss (string bear) =>
 {
     return Results.Ok(app);
 });
 
-app.MapGet("/api/random/{id:}", searchTweetss (string bear) =>
-{
-    return Results.Ok(app);
-});
-
+//Mock Examples
 app.MapGet("/api/randomTweetVIP", () => "it's a beautiful day in the neighborhood");
-
-//app.MapPost("/api/{string:me}", () => "it's a beautiful day in the neighborhood");
 
 /// <summary>
 /// Start the Server 

@@ -46,7 +46,7 @@ namespace theOfficialServer
         //    //return json;
         //}
 
-        public async Task<Tweets?> SearchTweetsbyUser(string user)
+        public async Task<Tweets?> SearchTweetsbyUser(string username)
         {
             return
                 await _httpClient.GetFromJsonAsync<Tweets>(
