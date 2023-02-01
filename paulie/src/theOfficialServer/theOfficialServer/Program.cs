@@ -4,6 +4,7 @@
 //using theOfficialServer.Data_Source;
 
 //namespace theOfficialServer
+using System.Net.Http.Headers;
 {
     //public class Program
     //{
@@ -77,33 +78,30 @@
     //}
     //    }
     //}
-    using theOfficialServer.Logic;
-    using theOfficialServer.Data_Source;
-    using theOfficialServer.Models;
+using theOfficialServer.Logic;
+using theOfficialServer.Data_Source;
+using theOfficialServer.Models;
 
-    var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 /// <summary>
 /// Setup Services
 /// </summary>
 
-//builder.Services.AddScoped<TwitterEndpoints>();
-
 builder.Services.AddControllers();
 builder.Services.AddSingleton<ITwitterEndpoints, TwitterEndpoints>();
 
 builder.Services.AddHttpClient<ITwitterEndpoints, TwitterEndpoints>(client =>
 {
+    client.DefaultRequestHeaders.Accept.Clear();
     client.BaseAddress = new Uri("https://api.twitter.com/2/");
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorize);
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
-// endpoint users/by/username
-
-//TwitterApi.InitializeClient(bearer);
-
 builder.Services.AddRazorPages();
-builder.Services.AddTransient<TwitterEndpoints>();
+//builder.Services.AddTransient<TwitterEndpoints>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -128,27 +126,27 @@ app.MapGet("/search/{id}", async (string username, TwitterEndpoints getByUsernam
     getByUsername.SearchTweetsbyUser(username).ToListAsync();
 });
 
-//app.MapGet("/api/user", searchTweetss(string bear) =>
-//{
-//    return Results.Ok(app);
-//});
-
-app.MapGet("/search/{content}", async (string tweetContext, TwitterEndpoints getByContent) =>
+app.MapGet("/search/{content}", async (string tweetContent, TwitterEndpoints getByContent) =>
 {
     await 
-    getByContent.SearchTweetsByContent(tweetContext).ToListAsync();
+    getByContent.SearchTweetsByContent(tweetContent).ToListAsync();
     //return Results.Ok(app);
 });
 
-app.MapGet("/randomVIP", searchTweetss (string bear) =>
+app.MapGet("/randomVIP", async (string random, TwitterEndpoints getRandomVIP) =>
 {
-    return Results.Ok(app);
+    await 
+    getRandomVIP.SearchTweetsByContent(random).ToListAsync();
+    //return ? Results.Ok(app) : ;
 });
 
 //Mock Examples
-app.MapGet("/api/randomTweetVIP", () => "it's a beautiful day in the neighborhood");
+//app.MapGet("/api/randomTweetVIP", () => "it's a beautiful day in the neighborhood");
 
-/// <summary>
-/// Start the Server 
-/// </summary>
-app.Run();
+//Recent Tweets 
+//https://api.twitter.com/2/tweets/search/recent?query=ethereum
+
+    /// <summary>
+    /// Start the Server 
+    /// </summary>
+    app.Run();

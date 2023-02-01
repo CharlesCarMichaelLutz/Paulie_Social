@@ -9,6 +9,7 @@ namespace theOfficialServer
     public class TwitterEndpoints : ITwitterEndpoints
     {
         // pass in the api keys here
+        public string auth = "xcnjcbdskj";
 
         private readonly HttpClient _httpClient;
 
@@ -17,6 +18,9 @@ namespace theOfficialServer
         {
             _httpClient = httpClient;
         }
+
+        //prototype
+
         //public static async Task<Tweets> SearchTweets()
         //{
               // query and paramaters
@@ -46,14 +50,34 @@ namespace theOfficialServer
         //    //return json;
         //}
 
-        public async Task<Tweets?> SearchTweetsbyUser(string username)
+        //next example
+
+        //public async Task<Tweets?> SearchTweetsbyUser(string username)
+        //{
+        //    return
+        //        await _httpClient.GetFromJsonAsync<Tweets>(
+        //            //modified url path goes here
+        //            //query sring with fields and expansions
+        //            )
+        //        //endpoint "users/by?usernames={user}"
+        //}
+
+        //current
+
+        public async Task<IEnumerable<Tweets>> Search(string query)
         {
-            return
-                await _httpClient.GetFromJsonAsync<Tweets>(
-                    //modified url path goes here
-                    //query sring with fields and expansions
-                    )
-                //endpoint "users/by?usernames={user}"
+            List<Tweets> list = new List<Tweets>();
+
+            var urlPath = $"users/by?usernames={query}";
+        }
+
+
+
+
+        public async Task<IActionResult> GetBirds(string query)
+        {
+            var tweets = await _httpClient.GetCurrentWeatherForCity();
+            return tweets is not null ? Ok(tweets) : NotFound();
         }
         public interface ITwitterEndpoints
         {
