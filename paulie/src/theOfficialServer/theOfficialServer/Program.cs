@@ -1,36 +1,34 @@
-using theOfficialServer.Logic;
-using theOfficialServer.Data_Source;
-using theOfficialServer.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 using theOfficialServer;
 using theOfficialServer.Authentication;
+using theOfficialServer.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+/// <summary>
+/// Setup Services
+/// </summary>
 services.AddAuthentication().AddTwitter(twitterOptions =>
 {
     twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerAPIKey"];
     twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
 });
 
-/// <summary>
-/// Setup Services
-/// </summary>
-
 builder.Services.AddControllers();
-builder.Services.AddSingleton<ITwitterEndpoints, TwitterEndpoints>();
+builder.Services.AddSingleton<ITwitterService, TwitterService>();
 
-builder.Services.AddHttpClient<ITwitterEndpoints, TwitterEndpoints>(client =>
+builder.Services.AddHttpClient<ITwitterService, TwitterService>(client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
     client.BaseAddress = new Uri("https://api.twitter.com/2/");
-    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authorize);
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
 builder.Services.AddRazorPages();
-//builder.Services.AddTransient<TwitterEndpoints>();
+//builder.Services.AddTransient<TwitterService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -39,47 +37,33 @@ var app = builder.Build();
 /// <summary>
 /// Add Middleware
 /// </summary>
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<ApiKeyAuthMiddleware>();
+app.UseAuthentication();
+//app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 //app.UseAuthorization();
 
 //app.MapControllers();
 
-app.MapGet("/search/{id}", async (string username, TwitterEndpoints getByUsername) =>
+app.MapGet("/search/{content}", async ([FromQuery] string tweetContent, TwitterService getByText) =>
 {
-    await
-    getByUsername.SearchTweetsbyUser(username).ToListAsync();
+    await getByText.SearchTweets(tweetContent);
 });
 
-//app.MapGet("/search/{content}", async (string tweetContent, TwitterEndpoints getByContent) =>
-//{
-//    await 
-//    getByContent.SearchTweetsByContent(tweetContent).ToListAsync();
-//    //return Results.Ok(app);
-//});
-
-app.MapGet("/search/{content}", (string tweetContent, TwitterEndpoints getByContent) =>
+app.MapGet("/search/{id}", async ([FromQuery] string username, TwitterService getByUsername) =>
 {
-    getByContent.Search(tweetContent);
+    await getByUsername.SearchUsers(username);
 });
 
-app.MapGet("/randomVIP", async (string random, TwitterEndpoints getRandomVIP) =>
+app.MapGet("/randomVIP", async ([FromQuery] string random, TwitterService RandomVIP) =>
 {
-    await 
-    getRandomVIP.SearchTweetsByContent(random).ToListAsync();
-    //return ? Results.Ok(app) : ;
+    await RandomVIP.GetVipTweet(random);
 });
 
-//Mock Examples
-//app.MapGet("/api/randomTweetVIP", () => "it's a beautiful day in the neighborhood");
-
-//Recent Tweets 
 //https://api.twitter.com/2/tweets/search/recent?query=ethereum
 
     /// <summary>
