@@ -23,7 +23,7 @@ namespace theOfficialServer
 
         //public static async Task<Tweets> SearchTweets()
         //{
-              // query and paramaters
+        // query and paramaters
         //    //string query = "tweets/search/recent?query=boston";
 
         //    //string url = "tweets/search/{id:}";
@@ -63,17 +63,14 @@ namespace theOfficialServer
         //}
 
         //current
-
         public async Task<IEnumerable<Tweets>> Search(string query)
         {
             List<Tweets> list = new List<Tweets>();
 
             var urlPath = $"users/by?usernames={query}";
+
+            string json = await _httpClient.GetStringAsync(urlPath);
         }
-
-
-
-
         public async Task<IActionResult> GetBirds(string query)
         {
             var tweets = await _httpClient.GetCurrentWeatherForCity();
