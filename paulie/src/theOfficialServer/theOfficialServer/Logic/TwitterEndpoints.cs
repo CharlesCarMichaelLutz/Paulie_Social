@@ -71,11 +71,6 @@ namespace theOfficialServer
 
             string json = await _httpClient.GetStringAsync(urlPath);
         }
-        public async Task<IActionResult> GetBirds(string query)
-        {
-            var tweets = await _httpClient.GetCurrentWeatherForCity();
-            return tweets is not null ? Ok(tweets) : NotFound();
-        }
         public interface ITwitterEndpoints
         {
            Task<Tweets> SearchTweetsAsync();

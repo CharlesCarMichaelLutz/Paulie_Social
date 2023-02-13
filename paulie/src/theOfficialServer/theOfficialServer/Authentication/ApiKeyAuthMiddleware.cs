@@ -3,6 +3,7 @@
     public class ApiKeyAuthMiddleware
     {
         private readonly RequestDelegate _next;
+        //secrets manager injected here
         private readonly IConfiguration _configuration;
 
         public ApiKeyAuthMiddleware(RequestDelegate next)
@@ -19,6 +20,13 @@
                 return;
             }
             var apiKey = _configuration.GetValue<string>(AuthConstants.ApiKeyHeaderName);
+            if (apiKey.Equals(extractedApiKey))
+            {
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync("Invalid API Key");
+            }
+
+            await _next(context);
         }
     }
 }

@@ -2,9 +2,17 @@ using theOfficialServer.Logic;
 using theOfficialServer.Data_Source;
 using theOfficialServer.Models;
 using theOfficialServer;
+using theOfficialServer.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+var configuration = builder.Configuration;
+
+services.AddAuthentication().AddTwitter(twitterOptions =>
+{
+    twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerAPIKey"];
+    twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
+});
 
 /// <summary>
 /// Setup Services
@@ -37,9 +45,11 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-    //app.UseAuthorization();
+app.UseMiddleware<ApiKeyAuthMiddleware>();
 
-    //app.MapControllers();
+//app.UseAuthorization();
+
+//app.MapControllers();
 
 app.MapGet("/search/{id}", async (string username, TwitterEndpoints getByUsername) =>
 {
