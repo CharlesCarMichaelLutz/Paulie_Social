@@ -1,5 +1,6 @@
 ﻿using theOfficialServer.Models;
 using theOfficialServer.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace theOfficialServer
 {
@@ -16,7 +17,7 @@ namespace theOfficialServer
             _httpClient = httpClient;
             _configuration = configuration;
         }
-        public async Task<IEnumerable<Tweets>> SearchTweets(string searchTerm)
+        public async Task<IEnumerable<Tweets>> SearchTweets([FromRoute]string searchTerm)
         {
             List<Tweets> aList = new List<Tweets>();
             var paramaters = $"users/by?usernames={searchTerm}";
@@ -27,7 +28,7 @@ namespace theOfficialServer
             //Deserialize here
             return aList;
         }
-        public async Task<IEnumerable<Tweets>> SearchUsers(string searchTerm)
+        public async Task<IEnumerable<Tweets>> SearchUsers([FromRoute]string searchTerm)
         {
             List<Tweets> bList = new List<Tweets>();
             var parameters = $"users/by?usernames={searchTerm}";
@@ -37,7 +38,7 @@ namespace theOfficialServer
             return bList;
         }
 
-        public async Task<IEnumerable<Tweets>> GetVipTweet(string searchTerm)
+        public async Task<IEnumerable<Tweets>> GetVipTweet([FromRoute]string searchTerm)
         {
             List<Tweets> cList = new List<Tweets>();
             var parameters = $"users/by?usernames={searchTerm}";
@@ -48,3 +49,11 @@ namespace theOfficialServer
         }
     }  
 }
+
+///
+/// if (customer is null)
+/// {
+///     return NotFound();
+/// }
+/// logic here
+/// return Ok(updatedCustomer);

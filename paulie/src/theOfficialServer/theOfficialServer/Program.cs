@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
+using System.Text;
 using theOfficialServer;
 using theOfficialServer.Authentication;
 using theOfficialServer.Controllers;
@@ -19,7 +20,7 @@ services.AddAuthentication().AddTwitter(twitterOptions =>
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<ITwitterService, TwitterService>();
-
+Console.WriteLine(configuration);
 builder.Services.AddHttpClient<ITwitterService, TwitterService>(client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
@@ -49,17 +50,17 @@ app.UseAuthentication();
 
 //app.MapControllers();
 
-app.MapGet("/search/{content}", async ([FromQuery] string tweetContent, TwitterService getByText) =>
+app.MapGet("/search/{content}", async (string tweetContent, TwitterService getByText) =>
 {
     await getByText.SearchTweets(tweetContent);
 });
 
-app.MapGet("/search/{id}", async ([FromQuery] string username, TwitterService getByUsername) =>
+app.MapGet("/search/{id}", async (string username, TwitterService getByUsername) =>
 {
     await getByUsername.SearchUsers(username);
 });
 
-app.MapGet("/randomVIP", async ([FromQuery] string random, TwitterService RandomVIP) =>
+app.MapGet("/randomVIP", async (string random, TwitterService RandomVIP) =>
 {
     await RandomVIP.GetVipTweet(random);
 });
