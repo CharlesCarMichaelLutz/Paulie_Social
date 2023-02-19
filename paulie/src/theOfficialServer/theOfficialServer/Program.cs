@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
-using System.Text;
 using theOfficialServer;
 using theOfficialServer.Authentication;
 using theOfficialServer.Controllers;
@@ -9,18 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-/// <summary>
-/// Setup Services
-/// </summary>
 services.AddAuthentication().AddTwitter(twitterOptions =>
 {
     twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerAPIKey"];
     twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
 });
 
-builder.Services.AddControllers();
-builder.Services.AddSingleton<ITwitterService, TwitterService>();
-Console.WriteLine(configuration);
 builder.Services.AddHttpClient<ITwitterService, TwitterService>(client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
@@ -28,27 +21,37 @@ builder.Services.AddHttpClient<ITwitterService, TwitterService>(client =>
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
+//builder.Services.AddTransient<ITwitterService, TwitterService>();
 builder.Services.AddRazorPages();
-//builder.Services.AddTransient<TwitterService>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo 
+    { 
+        Title = "Paulie Social",
+        Description = "See the chirps of the world",
+        Version = "v1"
+    });
+});
 
 var app = builder.Build();
 
-/// <summary>
-/// Add Middleware
-/// </summary>
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Paulie Social v1");
+    });
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 //app.UseMiddleware<ApiKeyAuthMiddleware>();
 
-//app.UseAuthorization();
+app.UseAuthorization();
 
-//app.MapControllers();
+app.MapGet("/intro", () => "What's up?");
 
 app.MapGet("/search/{content}", async (string tweetContent, TwitterService getByText) =>
 {
@@ -65,9 +68,12 @@ app.MapGet("/randomVIP", async (string random, TwitterService RandomVIP) =>
     await RandomVIP.GetVipTweet(random);
 });
 
+//app.MapGet("/search/{content}", async (string tweetContent) => await TwitterService.SearchTweets(tweetContent);
+
+//app.MapGet("/search/{id}", async (string username) => await TwitterService.SearchUsers(username);
+
+//app.MapGet("/randomVIP", async (string random) => await TwitterService.GetVipTweet(random);
+
 //https://api.twitter.com/2/tweets/search/recent?query=ethereum
 
-    /// <summary>
-    /// Start the Server 
-    /// </summary>
-    app.Run();
+app.Run();
