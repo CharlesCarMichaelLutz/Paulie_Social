@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using theOfficialServer;
 using theOfficialServer.Authentication;
@@ -8,20 +9,22 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-services.AddAuthentication().AddTwitter(twitterOptions =>
-{
-    twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerAPIKey"];
-    twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
-});
+//services.AddAuthentication().AddTwitter(twitterOptions =>
+//{
+//    twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerAPIKey"];
+//    twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
+//});
 
 builder.Services.AddHttpClient<ITwitterService, TwitterService>(client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
+    var credentials = Environment.GetEnvironmentVariable("MY_BEARER_TOKEN");
     client.BaseAddress = new Uri("https://api.twitter.com/2/");
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", credentials);
 });
 
-//builder.Services.AddTransient<ITwitterService, TwitterService>();
+builder.Services.AddTransient<ITwitterService, TwitterService>();
 builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -46,12 +49,12 @@ app.UseSwaggerUI(c =>
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
+//app.UseAuthentication();
 //app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 app.UseAuthorization();
 
-app.MapGet("/intro", () => "What's up?");
+//app.MapGet("/intro", () => "What's up?");
 
 app.MapGet("/search/{content}", async (string tweetContent, TwitterService getByText) =>
 {

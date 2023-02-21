@@ -14,24 +14,22 @@ namespace theOfficialServer
         // pass in the api keys here
 
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
 
         public TwitterService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _configuration = configuration;
         }
-        public async Task<List<Tweets>> SearchTweets([FromRoute]string searchTerm)
+        public async Task<List<Tweets>> SearchTweets([FromRoute] string searchTerm)
         {
             List<Tweets> aList = new List<Tweets>();
             var paramaters = $"users/by?usernames={searchTerm}";
             string json = await _httpClient.GetStringAsync(paramaters);
-            //HttpResponseMessage response = await _httpClient.GetAsync(paramaters).ConfigureAwait(false);
+            HttpResponseMessage response = await _httpClient.GetAsync(json).ConfigureAwait(false);
 
             //Deserialize here
             return aList;
         }
-        public async Task<List<Tweets>> SearchUsers([FromRoute]string searchTerm)
+        public async Task<List<Tweets>> SearchUsers([FromRoute] string searchTerm)
         {
             List<Tweets> bList = new List<Tweets>();
             var parameters = $"users/by?usernames={searchTerm}";
@@ -57,7 +55,7 @@ namespace theOfficialServer
 
             var parameters = $"users/by?usernames={searchTerm}";
             HttpResponseMessage response = await _httpClient.GetAsync(parameters);
-            if(response.IsSuccessStatusCode) 
+            if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
                 var tweetList = JsonConvert.DeserializeObject<Tweets>(jsonString);
