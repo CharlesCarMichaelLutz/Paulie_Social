@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -56,17 +57,17 @@ app.UseAuthorization();
 
 //app.MapGet("/intro", () => "What's up?");
 
-app.MapGet("/search/{content}", async (string tweetContent, TwitterService getByText) =>
+app.MapGet("/search/{content}", async ([FromServices] TwitterService getByText, [FromQuery]string tweetContent) =>
 {
     await getByText.SearchTweets(tweetContent);
 });
 
-app.MapGet("/search/{id}", async (string username, TwitterService getByUsername) =>
+app.MapGet("/search/{id}", async ([FromServices] TwitterService getByUsername, [FromQuery] string username) =>
 {
-    await getByUsername.SearchUsers(username);
+     await getByUsername.SearchUsers(username);
 });
 
-app.MapGet("/randomVIP", async (string random, TwitterService RandomVIP) =>
+app.MapGet("/randomVIP", async ([FromServices] TwitterService RandomVIP, [FromQuery] string random) =>
 {
     await RandomVIP.GetVipTweet(random);
 });
