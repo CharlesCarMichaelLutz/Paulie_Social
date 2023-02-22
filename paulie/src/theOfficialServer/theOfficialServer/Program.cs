@@ -26,6 +26,7 @@ builder.Services.AddHttpClient<ITwitterService, TwitterService>(client =>
 });
 
 builder.Services.AddTransient<ITwitterService, TwitterService>();
+//builder.Services.AddScoped<ITwitterService, TwitterService>();
 builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -55,28 +56,20 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-//app.MapGet("/intro", () => "What's up?");
-
 app.MapGet("/search/{content}", async ([FromServices] TwitterService getByText, [FromQuery]string tweetContent) =>
 {
     await getByText.SearchTweets(tweetContent);
 });
 
-app.MapGet("/search/{id}", async ([FromServices] TwitterService getByUsername, [FromQuery] string username) =>
+app.MapGet("/search/username/{id}", async ([FromServices] TwitterService getByUsername, [FromQuery] string username) =>
 {
      await getByUsername.SearchUsers(username);
 });
 
-app.MapGet("/randomVIP", async ([FromServices] TwitterService RandomVIP, [FromQuery] string random) =>
+app.MapGet("/search/randomVIP", async ([FromServices] TwitterService RandomVIP, [FromQuery] string random) =>
 {
     await RandomVIP.GetVipTweet(random);
 });
-
-//app.MapGet("/search/{content}", async (string tweetContent) => await TwitterService.SearchTweets(tweetContent);
-
-//app.MapGet("/search/{id}", async (string username) => await TwitterService.SearchUsers(username);
-
-//app.MapGet("/randomVIP", async (string random) => await TwitterService.GetVipTweet(random);
 
 //https://api.twitter.com/2/tweets/search/recent?query=ethereum
 

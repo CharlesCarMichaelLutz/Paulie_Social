@@ -15,11 +15,11 @@ namespace theOfficialServer
 
         private readonly HttpClient _httpClient;
 
-        public TwitterService(HttpClient httpClient, IConfiguration configuration)
+        public TwitterService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
-        public async Task<List<Tweets>> SearchTweets([FromRoute] string searchTerm)
+        public async Task<List<Tweets>> SearchTweets(string searchTerm)
         {
             List<Tweets> aList = new List<Tweets>();
             var paramaters = $"users/by?usernames={searchTerm}";
@@ -29,7 +29,7 @@ namespace theOfficialServer
             //Deserialize here
             return aList;
         }
-        public async Task<List<Tweets>> SearchUsers([FromRoute] string searchTerm)
+        public async Task<List<Tweets>> SearchUsers(string searchTerm)
         {
             List<Tweets> bList = new List<Tweets>();
             var parameters = $"users/by?usernames={searchTerm}";
@@ -49,7 +49,7 @@ namespace theOfficialServer
         //    return cList;
         //}
 
-        public async Task<List<Tweets>> GetVipTweet([FromRoute] string searchTerm)
+        public async Task<List<Tweets>> GetVipTweet(string searchTerm)
         {
             List<Tweets> cList = new List<Tweets>();
 
