@@ -21,22 +21,45 @@ namespace theOfficialServer
         }
         public async Task<List<Tweets>> SearchTweets(string searchTerm)
         {
-            List<Tweets> aList = new List<Tweets>();
-            var paramaters = $"users/by?usernames={searchTerm}";
-            string json = await _httpClient.GetStringAsync(paramaters);
-            HttpResponseMessage response = await _httpClient.GetAsync(json).ConfigureAwait(false);
+            List<Tweets> tweetsList = new List<Tweets>();
 
-            //Deserialize here
-            return aList;
+            //set the endpoint to search for tweets by content
+            var endpoint = $"tweets/search/recent?query={searchTerm}";
+            //var paramters = $"users/by?usernames={searchTerm}";
+
+            //Make a GET req to the Twitter API
+            HttpResponseMessage response = await _httpClient.GetAsync(endpoint).ConfigureAwait(false);
+
+            //HttpResponseMessage response = await _httpClient.GetAsync(json).ConfigureAwait(false);
+
+            // Read the response content as a JSON string
+            string json = await response.Content.ReadAsStringAsync();
+
+            //Deserialize JSON into a list of Tweet objects
+            tweetsList = JsonConvert.DeserializeObject<List<Tweets>>(json);
+
+            return tweetsList;
         }
         public async Task<List<Tweets>> SearchUsers(string searchTerm)
         {
-            List<Tweets> bList = new List<Tweets>();
-            var parameters = $"users/by?usernames={searchTerm}";
-            string json = await _httpClient.GetStringAsync(parameters);
+            List<Tweets> tweetsList = new List<Tweets>();
+
+            //set the endpoint to search for tweets by content
+            //var parameters = $"users/by?usernames={searchTerm}";
+            var endpoint = $"users/by/username/{searchTerm}/tweets";
+
+            //Make a GET req to the Twitter API
+            HttpResponseMessage response = await _httpClient.GetAsync(endpoint).ConfigureAwait(false);
+
+            // Read the response content as a JSON string
+            //string json = await _httpClient.GetStringAsync(parameters);
+            string json = await response.Content.ReadAsStringAsync();
+
 
             //Deserialize here
-            return bList;
+            tweetsList = JsonConvert.DeserializeObject<List<Tweets>>(json);
+
+            return tweetsList;
         }
 
         //public async Task<IEnumerable<Tweets>> GetVipTweet([FromRoute]string searchTerm)
