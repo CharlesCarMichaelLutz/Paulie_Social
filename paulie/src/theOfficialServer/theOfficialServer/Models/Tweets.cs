@@ -9,11 +9,11 @@ namespace theOfficialServer.Models
         //tweet fields & expansions
         //public string AvatarImage { get; set; }
         //author_id
-        [JsonProperty("id")]
-        public string UserName { get; set; }
-        //public string UserHandle { get; set; }
-        [JsonProperty("text")]
-        public string Tweet { get; set; }
+        // username
+        public string id { get; set; }
+        //public string auhtor_id { get; set; }
+        // tweet
+        public string text { get; set; }
         //public string Image { get; set; }
         ////expansions=attachments.media_keys
         //public string Video { get; set; }
