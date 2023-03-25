@@ -4,7 +4,7 @@
     {
         List<Twitter> GetAllTweets();
 
-        List<Twitter> GetTweetsBySearchTerm(string searchTerm);
+        List<Twitter> ? GetTweetsByContent(string searchTerm);
 
         List<Twitter> GetTweetsByUsername(string username);
 

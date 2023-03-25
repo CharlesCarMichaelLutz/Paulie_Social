@@ -26,8 +26,16 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Paulie Social API V1");
 });
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/twitter", (ITweetRepository allTweets) =>  allTweets.GetAllTweets());
 
-app.MapGet("/tweets", (ITweetRepository tweet) =>  tweet.GetAllTweets());
+//TODO - create route for searching by content
+app.MapGet("/twitter/search/content/{searchTerm}", (string searchTerm, ITweetRepository content) => content.GetTweetsByContent(searchTerm));
+
+//TODO - create route for searching by username
+app.MapGet("/twitter/search/username/{username}", (string username, ITweetRepository getUser) => getUser.GetTweetsByUsername(username));
+
+//TODO - create route for getting random VIP tweets
+app.MapGet("/twitter/vips/random", (ITweetRepository vip) => vip.GetRandomTweet());
+
 
 app.Run();

@@ -6,7 +6,6 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
     {
         private static List<Twitter> _tweets = new List<Twitter>()
         {
-            // Twitter objects will be entered here
            new Twitter()
            {
                TweetContent = "Just tried a new vegan restaurant and it was amazing! Who says plant-based food can't be delicious? 🌱👌 #vegan #foodie #yum",
@@ -71,12 +70,14 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
            }
         };
 
+        //TODO - Create a service
         public List<Twitter> GetAllTweets()
         {
             return _tweets;
         }
-        public List<Twitter> GetTweetsBySearchTerm(string searchTerm)
+        public List<Twitter> ? GetTweetsByContent(string searchTerm)
         {
+            //return _tweets.SingleOrDefault(query => query.TweetContent == searchTerm);
             throw new NotImplementedException();
         }
 
@@ -87,6 +88,6 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
         public Twitter GetRandomTweet()
         {
             throw new NotImplementedException();
-        }
+        }     
     }
 }
