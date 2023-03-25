@@ -24,3 +24,9 @@ C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebAp
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\PaulieSocialWebApi.pdb
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\PaulieSocialWebApi.genruntimeconfig.cache
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\ref\PaulieSocialWebApi.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\PaulieSocialWebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\PaulieSocialWebApi.csproj.CopyComplete

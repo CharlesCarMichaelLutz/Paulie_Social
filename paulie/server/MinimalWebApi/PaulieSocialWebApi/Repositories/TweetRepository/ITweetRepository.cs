@@ -2,6 +2,12 @@
 {
     public interface ITweetRepository
     {
-        List<Twitter> GetTweets();
+        List<Twitter> GetAllTweets();
+
+        List<Twitter> GetTweetsBySearchTerm(string searchTerm);
+
+        List<Twitter> GetTweetsByUsername(string username);
+
+        Twitter GetRandomTweet();
     }
 }
