@@ -35,7 +35,7 @@ app.MapGet("/twitter/search/content/{searchTerm}", (string searchTerm, ITweetRep
 app.MapGet("/twitter/search/username/{username}", (string username, ITweetRepository getUser) => getUser.GetTweetsByUsername(username));
 
 //TODO - create route for getting random VIP tweets
-app.MapGet("/twitter/vips/random", (ITweetRepository vip) => vip.GetRandomTweet());
+app.MapGet("/twitter/vips/random", (int id , ITweetRepository vip) => vip.GetRandomTweet(id));
 
 
 app.Run();
