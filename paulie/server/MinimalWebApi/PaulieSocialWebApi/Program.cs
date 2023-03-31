@@ -29,13 +29,13 @@ app.UseSwaggerUI(c =>
 app.MapGet("/twitter", (ITweetRepository allTweets) =>  allTweets.GetAllTweets());
 
 //TODO - create route for searching by content
-app.MapGet("/twitter/search/content/{searchTerm}", (string searchTerm, ITweetRepository content) => content.GetTweetsByContent(searchTerm));
+app.MapGet("/twitter/search/content/{searchTerm}", (ITweetRepository content, string searchTerm) => content.GetTweetsByContent(searchTerm));
 
 //TODO - create route for searching by username
-app.MapGet("/twitter/search/username/{username}", (string username, ITweetRepository getUser) => getUser.GetTweetsByUsername(username));
+app.MapGet("/twitter/search/username/{username}", (ITweetRepository getUser, string username) => getUser.GetTweetsByUsername(username));
 
 //TODO - create route for getting random VIP tweets
-app.MapGet("/twitter/vips/random", (int id , ITweetRepository vip) => vip.GetRandomTweet(id));
+app.MapGet("/twitter/vips/random", (ITweetRepository vip, int id) => vip.GetRandomTweet(id));
 
 
 app.Run();

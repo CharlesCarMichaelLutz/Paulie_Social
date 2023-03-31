@@ -4,9 +4,7 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 {
     public class TweetRepository : ITweetRepository
     {
-        private static List<Twitter> _tweets = new List<Twitter>()
-        //private static IEnumerable<Twitter> _tweets = new List<Twitter>()
-        //private static List<Twitter> _tweets = new()
+        private static List<Twitter> mockTweets = new List<Twitter>()
         {
            new Twitter()
            {
@@ -75,12 +73,20 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
         //TODO - Create a service
         public IEnumerable<Twitter> GetAllTweets()
         {
-            return _tweets;
+            return mockTweets;
         }
         public IEnumerable<Twitter> GetTweetsByContent(string searchTerm)
         {
-            //return _tweets.SingleOrDefault(query => query.TweetContent == searchTerm);
-            throw new NotImplementedException();
+            List<Twitter> tweets = new List<Twitter>();
+
+            foreach(Twitter twitter in mockTweets) 
+            { 
+                if(twitter.TweetContent.Contains(searchTerm))
+                {
+                    tweets.Add(twitter);
+                }
+            }
+            return tweets;
         }
 
         public IEnumerable<Twitter> GetTweetsByUsername(string username)
