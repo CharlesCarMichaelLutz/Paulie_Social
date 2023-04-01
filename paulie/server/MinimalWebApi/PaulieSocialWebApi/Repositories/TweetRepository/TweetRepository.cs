@@ -70,7 +70,7 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
            }
         };
 
-        //TODO - Create a service
+        //Mock Service Methods
         public IEnumerable<Twitter> GetAllTweets()
         {
             return mockTweets;
@@ -91,7 +91,18 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 
         public IEnumerable<Twitter> GetTweetsByUsername(string username)
         {
-            throw new NotImplementedException();
+            List<Twitter> tweets = new List<Twitter>();
+
+            foreach (Twitter twitter in mockTweets)
+            { 
+                var lowerCase= twitter.AuthorId.UserName.ToLower();
+
+                if (lowerCase.Equals(username.ToLower()))
+                {
+                    tweets.Add(twitter);
+                }
+            }
+            return tweets;
         }
         public Twitter GetRandomTweet(int id)
         {

@@ -5,7 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 //Dependency Injection
-
 services.AddScoped<ITweetRepository, TweetRepository>();
 
 services.AddEndpointsApiExplorer();
@@ -26,15 +25,13 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Paulie Social API V1");
 });
 
+//Routing 
 app.MapGet("/twitter", (ITweetRepository allTweets) =>  allTweets.GetAllTweets());
 
-//TODO - create route for searching by content
 app.MapGet("/twitter/search/content/{searchTerm}", (ITweetRepository content, string searchTerm) => content.GetTweetsByContent(searchTerm));
 
-//TODO - create route for searching by username
 app.MapGet("/twitter/search/username/{username}", (ITweetRepository getUser, string username) => getUser.GetTweetsByUsername(username));
 
-//TODO - create route for getting random VIP tweets
 app.MapGet("/twitter/vips/random", (ITweetRepository vip, int id) => vip.GetRandomTweet(id));
 
 
