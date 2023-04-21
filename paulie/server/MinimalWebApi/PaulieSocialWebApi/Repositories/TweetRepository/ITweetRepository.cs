@@ -2,12 +2,17 @@
 {
     public interface ITweetRepository
     {
-        IEnumerable<Twitter> GetAllTweets();
+        //Twitter Service Method Signatures
+        Task<IEnumerable<TweetModel>> GetTweetsByContent(string username);
 
-        IEnumerable<Twitter> GetTweetsByContent(string searchTerm);
+        //Mock Service Method Signatures
 
-        IEnumerable<Twitter> GetTweetsByUsername(string username);
+        //IEnumerable<TweetModel> GetAllTweets();
 
-        Twitter GetRandomTweet(int id);
+        //IEnumerable<TweetModel> GetTweetsByContent(string searchTerm);
+
+        //IEnumerable<TweetModel> GetTweetsByUsername(string username);
+
+        //TweetModel GetRandomTweet(int id);
     }
 }

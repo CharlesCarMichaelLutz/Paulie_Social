@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import UserCard from './UserCard';
 import ChirpCard from './ChirpCard';
 import Popup from './usePopup';
+//import Endpoints from '..Endpoints';
 
 const Random = ({userCards, chirps}) => {
+
+  // const [VIPTweet, getVIPTweet] = useState([])
+  // const [VIPUser, getVIPUser] = useState([])
+
+  //axios.get()
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +26,7 @@ const Random = ({userCards, chirps}) => {
   const content = chirps.map(user => {
     const random = Math.floor(Math.random() * chirps.length)
     const item = chirps[random]
-    console.log("item:", item)
+    console.log("Item:", item)
     return(
       <ChirpCard key={item.username} user={user} />
     )
@@ -40,7 +46,6 @@ const Random = ({userCards, chirps}) => {
         content={content}
         handleClose={togglePopup}
       />}
-      
     </div>
   )
 

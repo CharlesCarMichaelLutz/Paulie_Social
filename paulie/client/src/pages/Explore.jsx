@@ -1,7 +1,32 @@
 import React,{useState} from 'react'
 import ChirpCard from './ChirpCard';
+import Endpoints from '../Endpoints';
 
 const Explore = ({chirps}) => {
+
+  // useEffect(() => {
+  //   getTweets()
+  // }, [])
+
+  // const [chirps, setChirps] = useState([])
+
+  // const getTweets = async () => {
+  //   const response = await fetch(
+  //     "https://localhost:7014/api/explore/content/{searchTerm}"
+  //     );
+  //     const data = await response.json();
+  //     console.log(data);
+  //     setChirps(data);
+  // }
+
+  //axios.get()
+
+  // // if(searchTerm)
+  //     {
+
+  //     } else{
+  //       Username
+  //     }
 
   const [searchTerm, setSearchTerm] = useState('')
 

@@ -30,3 +30,17 @@ C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebAp
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\PaulieSocialWebApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\obj\Debug\net6.0\PaulieSocialWebApi.csproj.CopyComplete
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\libman.json
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Newtonsoft.dll

@@ -4,10 +4,11 @@ const usePopup = ({content, handleClose}) => {
 
   let {userImage, username, userhandle, chirpcontent, chirpLink, chirpImage, likes, retweets, donations} = content
   return (
+
     <div className='popup--box'>
       <div className='box'>
-        <span className='close--icon' onClick={handleClose}>X</span>
-        <h3>{username}</h3>
+      <span className='close--icon' onClick={handleClose}>X</span>
+        <h1>{username}</h1>
         <p>{userhandle}</p>
         <p>{chirpcontent}</p>
         <p>{userImage}</p>
@@ -17,7 +18,3 @@ const usePopup = ({content, handleClose}) => {
 }
 
 export default usePopup
-
-/*
-
-*/
