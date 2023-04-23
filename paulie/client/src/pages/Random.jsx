@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import UserCard from './UserCard';
 import ChirpCard from './ChirpCard';
 import Popup from './usePopup';
-//import Endpoints from '..Endpoints';
+import {endpoints} from '../Endpoints';
+import axios from 'axios';
+
 
 const Random = ({userCards, chirps}) => {
 
   // const [VIPTweet, getVIPTweet] = useState([])
   // const [VIPUser, getVIPUser] = useState([])
 
-  //axios.get()
+  axios.get(endpoints.BASE_URI+``)
 
   const [isOpen, setIsOpen] = useState(false);
 

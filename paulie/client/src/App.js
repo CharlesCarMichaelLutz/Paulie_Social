@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Explore from './pages/Explore';
 import Random from './pages/Random';
 import NoPage from './pages/NoPage';
-import Endpoints from './Endpoints';
+//import Endpoints from './Endpoints';
 
 function App() {
 
@@ -18,18 +18,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout/>}>  
-          <Route index element={
-            <Home />
-          } />
-          <Route path="Explore" element={
-            <Explore chirps={chirps}/>
-          } />
-          <Route path="Random" element={
-            <Random  userCards={userCards} chirps={chirps} />
-          } />
-          <Route path="*" element={
-            <NoPage /> 
-          } />
+          <Route index element={ <Home /> } />
+          <Route path="Explore" element={ <Explore />} />
+          <Route path="Random" element={ <Random />} />
+          <Route path="*" element={ <NoPage /> } />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -37,3 +29,9 @@ function App() {
 }
 
 export default App;
+
+/*
+chirps={chirps}
+
+userCards={userCards} chirps={chirps}
+*/

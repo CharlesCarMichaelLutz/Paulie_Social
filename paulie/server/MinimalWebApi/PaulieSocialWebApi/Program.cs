@@ -14,12 +14,12 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 var twitterApiKey = builder.Configuration["Twitter:bearerToken"];
-var issuer = builder.Configuration["Jwt:Issuer"];
-var audience = builder.Configuration["Jwt:Audience"];
-var jwtSigningKey = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Guid"]);
+//var issuer = builder.Configuration["Jwt:Issuer"];
+//var audience = builder.Configuration["Jwt:Audience"];
+//var jwtSigningKey = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Guid"]);
 
-var authUsername = builder.Configuration["Login:username"];
-var authPassword = builder.Configuration["Login:password"];
+//var authUsername = builder.Configuration["Login:username"];
+//var authPassword = builder.Configuration["Login:password"];
 
 var services = builder.Services;
 
@@ -27,26 +27,26 @@ var services = builder.Services;
 services.AddScoped<ITweetRepository, TweetRepository>();
 
 //Authentication 
-services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidIssuer = issuer,
-        ValidAudience = audience,
-        IssuerSigningKey = new SymmetricSecurityKey(jwtSigningKey),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = false, //In any other application other then demo this needs to be true 
-        ValidateIssuerSigningKey = true
-    };
-});
+//services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidIssuer = issuer,
+//        ValidAudience = audience,
+//        IssuerSigningKey = new SymmetricSecurityKey(jwtSigningKey),
+//        ValidateIssuer = true,
+//        ValidateAudience = true,
+//        ValidateLifetime = false, //In any other application other then demo this needs to be true 
+//        ValidateIssuerSigningKey = true
+//    };
+//});
 
-//services.AddAuthentication();
+services.AddAuthentication();
 services.AddAuthorization();
 
 services.AddHttpClient<ITweetRepository, TweetRepository>(client =>
@@ -57,30 +57,35 @@ services.AddHttpClient<ITweetRepository, TweetRepository>(client =>
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", twitterApiKey);
 });
 
-var securityScheme = new OpenApiSecurityScheme()
-{
-    Name = "Authorization",
-    Type = SecuritySchemeType.ApiKey,
-    Scheme = "Bearer",
-    BearerFormat = "JWT",
-    In = ParameterLocation.Header,
-    Description = "JSON Web Token based security",
-};
+//var securityScheme = new OpenApiSecurityScheme()
+//{
+//    Name = "Authorization",
+//    Type = SecuritySchemeType.ApiKey,
+//    Scheme = "Bearer",
+//    BearerFormat = "JWT",
+//    In = ParameterLocation.Header,
+//    Description = "JSON Web Token based security",
+//};
 
-var securityReq = new OpenApiSecurityRequirement()
+//var securityReq = new OpenApiSecurityRequirement()
+//{
+//    {
+//        new OpenApiSecurityScheme
+//        {
+//            Reference = new OpenApiReference
+//            {
+//                Type = ReferenceType.SecurityScheme,
+//                Id = "Bearer"
+//            }
+//        },
+//        new string[] {}
+//    }
+//};
+
+services.AddCors(c =>
 {
-    {
-        new OpenApiSecurityScheme
-        {
-            Reference = new OpenApiReference
-            {
-                Type = ReferenceType.SecurityScheme,
-                Id = "Bearer"
-            }
-        },
-        new string[] {}
-    }
-};
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(c =>
@@ -91,8 +96,8 @@ services.AddSwaggerGen(c =>
         Description = "See the chirps of the world",
         Version = "v1"
     });
-    c.AddSecurityDefinition("Bearer", securityScheme);
-    c.AddSecurityRequirement(securityReq);
+    //c.AddSecurityDefinition("Bearer", securityScheme);
+   //c.AddSecurityRequirement(securityReq);
 });
 
 var app = builder.Build();
@@ -106,36 +111,41 @@ app.UseSwaggerUI(c =>
 app.UseAuthorization();
 app.UseAuthentication();
 
-//JWT Route
-app.MapPost("/api/login", [AllowAnonymous] (UserDto user) =>
+app.UseCors(options => 
 {
-    if (user.username == authUsername && user.password == authPassword)
-    {
-        var securityKey = new SymmetricSecurityKey(jwtSigningKey);
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        var jwtTokenHandler = new JwtSecurityTokenHandler();
-
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim("Id", "1"),
-                new Claim(ClaimTypes.Name, user.username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            }),
-            Expires = DateTime.UtcNow.AddMinutes(15),
-            Audience = audience,
-            Issuer = issuer,
-            SigningCredentials = credentials
-        };
-
-        var token = jwtTokenHandler.CreateToken(tokenDescriptor);
-        var jwtToken = jwtTokenHandler.WriteToken(token);
-        return Results.Ok(jwtToken);
-    }
-    return Results.Unauthorized();
+    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 });
+
+//JWT Route
+//app.MapPost("/api/login", [AllowAnonymous] (UserDto user) =>
+//{
+//    if (user.username == authUsername && user.password == authPassword)
+//    {
+//        var securityKey = new SymmetricSecurityKey(jwtSigningKey);
+//        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+//        var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+//        var tokenDescriptor = new SecurityTokenDescriptor
+//        {
+//            Subject = new ClaimsIdentity(new[]
+//            {
+//                new Claim("Id", "1"),
+//                new Claim(ClaimTypes.Name, user.username),
+//                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+//            }),
+//            Expires = DateTime.UtcNow.AddMinutes(15),
+//            Audience = audience,
+//            Issuer = issuer,
+//            SigningCredentials = credentials
+//        };
+
+//        var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+//        var jwtToken = jwtTokenHandler.WriteToken(token);
+//        return Results.Ok(jwtToken);
+//    }
+//    return Results.Unauthorized();
+//});
 
 //Routing
 
