@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import ChirpCard from './ChirpCard';
-import {endpoints} from '../Endpoints';
+import { endpoints } from '../Endpoints';
 import axios from 'axios';
 import { Button } from 'bootstrap';
 
@@ -9,6 +9,10 @@ const Explore = () => {
 
   const [searchTerm, setSearchTerm] = useState('')
   const [tweets, setTweets] = useState([])
+
+  useEffect(() => {
+
+  }, [])
 
   const handleChange = e => {
     setSearchTerm(e.target.value)
@@ -21,16 +25,16 @@ const Explore = () => {
       .then((res) => {
         setTweets(res.data)
         console.log('search query: ',res.data)
-  })
+      })
 
   // dual buttons
     // onToggleButton ?
-    //   axios.get(endpoints.BASE_URI+`explore/content/${searchTerm}`)
+    //   axios.get(BASE_URI+`explore/${searchTerm}`)
     //     .then((res) => {
     //       setTweets(res.data)
     //       console.log('search by content query: ',res.data)
     //   }) :
-    //   axios.get(endpoints.BASE_URI+`explore/content/${searchTerm}`)
+    //   axios.get(BASE_URI+`/api/explore/${username}`)
     //     .then((res) => {
     //       setTweets(res.data)
     //       console.log('search by username query: ',res.data)
