@@ -3,6 +3,7 @@ using PaulieSocialWebApi.Models.TweetModel;
 using PaulieSocialWebApi.Models.UserIdModel;
 using System.Collections.Immutable;
 using System.Text.Json.Serialization;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Net.WebRequestMethods;
 
 namespace PaulieSocialWebApi.Repositories.TweetRepository
@@ -13,18 +14,16 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
         public TweetService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-        }   
+        }
         public async Task<IEnumerable<TweetModel>> GetTweetsByContent(string searchTerm)
         {
             List<TweetModel> tweets = new List<TweetModel>();
 
-            var extensionApi = $"tweets/search/recent?query={searchTerm}";
+            var endpoint = $"tweets/search/recent?query={searchTerm}";
 
-            //var parameters = $"max_results=25&expansions=author_id&media.fields=&user.fields=description&tweet.fields=public_metrics&?query={username}";
+            var parameters = $"{endpoint}&tweet.fields=author_id,public_metrics&media.fields=public_metrics&expansions=attachments.media_keys&max_results=25";
 
-            //var extensionApi = $"tweets/search/recent{parameters}";
-
-            HttpResponseMessage response = await _httpClient.GetAsync(extensionApi).ConfigureAwait(false);
+            HttpResponseMessage response = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
             {
@@ -43,21 +42,24 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
         public async Task<IEnumerable<TweetModel>> GetTweetsByUsername(string username)
         {
             //add using to http calls & error handling for bad requests
-            var trimUsername = username.Replace(" ","");
-
-            var usernameIdEndpoint = $"users/by/username/{trimUsername}";
 
             List<TweetModel> populatedList = new List<TweetModel>();
 
-            HttpResponseMessage userIdRequest = await _httpClient.GetAsync(usernameIdEndpoint).ConfigureAwait(false);
+            var trimUsername = username.Replace(" ","");
 
-            var idJson = await userIdRequest.Content.ReadAsStringAsync();
+            var endpointUserId = $"users/by/username/{trimUsername}";
 
-            var user = JsonConvert.DeserializeObject<UserIdModel>(idJson);
+            HttpResponseMessage userIdRequest = await _httpClient.GetAsync(endpointUserId).ConfigureAwait(false);
 
-            var usernameListEndpoint = $"users/{user.data.id}/tweets";
+                var idJson = await userIdRequest.Content.ReadAsStringAsync();
 
-            HttpResponseMessage userListRequest = await _httpClient.GetAsync(usernameListEndpoint).ConfigureAwait(false);
+                var user = JsonConvert.DeserializeObject<UserIdModel>(idJson);
+            
+                var endpointListTweets = $"users/{user.data.id}/tweets";
+
+                var parameters = $"{endpointListTweets}?tweet.fields=author_id,public_metrics&media.fields=public_metrics&expansions=attachments.media_keys&max_results=25";
+            
+            HttpResponseMessage userListRequest = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
 
             if (userListRequest.IsSuccessStatusCode)
             {
