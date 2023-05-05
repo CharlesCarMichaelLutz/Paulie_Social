@@ -70,25 +70,25 @@ app.UseCors(options =>
 
 //get tweets by searchTerm
 app.MapGet("/api/explore/content/{searchTerm}",
-    async (ITweetService tweetRepository, string searchTerm) =>
+    async (ITweetService tweetService, string searchTerm) =>
     {
-        var result = await tweetRepository.GetTweetsByContent(searchTerm);
+        var result = await tweetService.GetTweetsByContent(searchTerm);
         return Results.Ok(result);
     });
 
 app.MapGet("/api/explore/{username}",
-    async (ITweetService getUser, string username) =>
+    async (ITweetService tweetService, string username) =>
     {
-        var result = await getUser.GetTweetsByUsername(username);
+        var result = await tweetService.GetTweetsByUsername(username);
         return Results.Ok(result);
     });
 
-//app.MapGet("/api/randomVip",
-//    [Authorize] (ITweetRepository vip, int id) =>
-//    {
-//        var result = vip.GetRandomTweet(id);
-//        return Results.Ok(result);
-//    });
+app.MapGet("/api/randomVip",
+    async (ITweetService tweetService, string id) =>
+    {
+        var result = await tweetService.GetRandomVipTweet(id);
+        return Results.Ok(result);
+    });
 
 app.Run();
 

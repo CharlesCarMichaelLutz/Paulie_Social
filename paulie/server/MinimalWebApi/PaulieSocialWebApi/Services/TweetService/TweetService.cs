@@ -36,13 +36,14 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
                     tweets.Add(model);
                 }
             }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
             return tweets;
         }
-
         public async Task<IEnumerable<TweetModel>> GetTweetsByUsername(string username)
         {
-            //add using to http calls & error handling for bad requests
-
             List<TweetModel> populatedList = new List<TweetModel>();
 
             var trimUsername = username.Replace(" ","");
@@ -59,11 +60,11 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 
                 var parameters = $"{endpointListTweets}?tweet.fields=author_id,public_metrics&media.fields=public_metrics&expansions=attachments.media_keys&max_results=25";
             
-            HttpResponseMessage userListRequest = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
+            HttpResponseMessage response = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
 
-            if (userListRequest.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                string listJson = await userListRequest.Content.ReadAsStringAsync();
+                string listJson = await response.Content.ReadAsStringAsync();
 
                 Console.WriteLine(listJson);
 
@@ -76,9 +77,76 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
             }
             else
             {
-                Console.WriteLine("could not retrieve list of user tweets");
+                throw new Exception(response.ReasonPhrase);
             }
             return populatedList;
+        }
+       
+        public async Task<TweetModel> GetRandomVipTweet(string id)
+        {
+            //string id gets passed in from frontend as argument
+
+            //string User Id array will be the same in the frontend
+            //so it will map correctly with User Id list below
+
+            TweetModel populatedTweet = new TweetModel();
+
+            List<string> VipUsersId = new List<string>()
+            {
+                "850333483339730945",
+                "4398626122",
+                "1512200244",
+                "302666251",
+                "953748782394499072"
+            };
+
+            var random = new Random();
+
+            //that gets mapped to VipUsersId
+
+            /// If Id get passed in as an int
+            /// do the following:
+            /// 
+            ///  var convertIndex = Convert.ToString(id);
+            ///  int index = VipUsersId.IndexOf(convertIndex);
+            ///  
+
+            int index = VipUsersId.IndexOf(id);
+
+            if (index >= 0)
+            {
+                //User Id gets selected
+                string vipUserId = VipUsersId[index];
+
+                //API call for list of Tweets
+                var endpointListTweets = $"users/{vipUserId}/tweets?max_results=30&exclude=retweets,replies";
+
+                HttpResponseMessage response = await _httpClient.GetAsync(endpointListTweets).ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonString = await response.Content.ReadAsStringAsync();
+
+                    //randomize and select a tweet
+                    //var getIndexOfRandomTweet = random.Next(0, jsonString.Length);
+
+                    //var randomTweet = jsonString.data[getIndexOfRandomTweet];
+
+                    //Console.WriteLine(getIndexOfRandomTweet);
+
+                    populatedTweet = JsonConvert.DeserializeObject<TweetModel>(jsonString);
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+            return populatedTweet;
         }
     }
 }
