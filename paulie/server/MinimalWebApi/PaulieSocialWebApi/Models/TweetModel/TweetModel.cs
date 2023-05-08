@@ -7,9 +7,9 @@ namespace PaulieSocialWebApi.Models.TweetModel
     [Serializable]
     public class TweetModel
     {
-        public data[] data { get; set; }
+        public TweetData[] Data { get; set; }
     }
-    public class data
+    public class TweetData
     {
         public public_metrics public_metrics { get; set; }
         public string text { get; set; }
