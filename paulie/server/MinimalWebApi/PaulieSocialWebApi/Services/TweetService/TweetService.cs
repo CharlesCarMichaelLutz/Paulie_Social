@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PaulieSocialWebApi.Models.TweetModel;
 using PaulieSocialWebApi.Models.UserIdModel;
+using System;
 using System.Collections.Immutable;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Serialization;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Net.WebRequestMethods;
@@ -11,16 +13,19 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
     public class TweetService : ITweetService
     {
         private readonly HttpClient _httpClient;
+        //private readonly FieldsAndExpansions _fieldsAndExpansions;
         public TweetService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            //_fieldsAndExpansions = fieldsAndExpansions;
         }
         public async Task<IEnumerable<TweetModel>> GetTweetsByContent(string searchTerm)
         {
             List<TweetModel> tweets = new List<TweetModel>();
 
             var endpoint = $"tweets/search/recent?query={searchTerm}";
-            var parameters = $"{endpoint}&tweet.fields=author_id,public_metrics&media.fields=public_metrics&expansions=attachments.media_keys&max_results=25";
+            //var parameters = $"{endpoint}&{_extras}";
+            var parameters = $"{endpoint}&tweet.fields=author_id,public_metrics&media.fields=public_metrics,media_key,type&expansions=attachments.media_keys&max_results=25";
 
             HttpResponseMessage response = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
 
@@ -50,11 +55,15 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 
             HttpResponseMessage userIdRequest = await _httpClient.GetAsync(endpointUserId).ConfigureAwait(false);
 
+            //implement error handling for username input that can't be found 
+
             var idJson = await userIdRequest.Content.ReadAsStringAsync();
             var user = JsonConvert.DeserializeObject<UserIdModel>(idJson);
             var endpointListTweets = $"users/{user.data.id}/tweets";
-            var parameters = $"{endpointListTweets}?tweet.fields=author_id,public_metrics&media.fields=public_metrics&expansions=attachments.media_keys&max_results=25";
-            
+            //var parameters = $"{endpointListTweets}?{_fieldAndExpansions}";
+
+            var parameters = $"{endpointListTweets}?tweet.fields=author_id,public_metrics&media.fields=public_metrics,media_key,type&expansions=attachments.media_keys&max_results=25";
+
             HttpResponseMessage response = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
@@ -74,7 +83,6 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 
             return populatedList;
         }
-
         public async Task<TweetModel> GetRandomVipTweet(string id)
         {
             List<string> VipUsersId = new List<string>()
@@ -96,7 +104,8 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
             }
 
             string vipUserId = VipUsersId[index];
-            var endpointListTweets = $"users/{vipUserId}/tweets?max_results=30&exclude=retweets,replies";
+            //var endpointListTweets = $"users/{vipUserId}/tweets?{_fieldsAndExpansions}";
+            var endpointListTweets = $"users/{vipUserId}/tweets?tweet.fields=author_id,public_metrics&media.fields=public_metrics,media_key,type&expansions=attachments.media_keys&max_results=25&exclude=retweets,replies";
 
             HttpResponseMessage response = await _httpClient.GetAsync(endpointListTweets).ConfigureAwait(false);
 

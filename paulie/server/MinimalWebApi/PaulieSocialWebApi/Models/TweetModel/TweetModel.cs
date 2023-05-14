@@ -8,14 +8,15 @@ namespace PaulieSocialWebApi.Models.TweetModel
     public class TweetModel
     {
         public TweetData[] Data { get; set; }
+        public includes includes { get; set; } 
     }
     public class TweetData
     {
-        public public_metrics public_metrics { get; set; }
+        public string author_id { get; set; }
         public string text { get; set; }
         public string id { get; set; }
-        public string author_id { get; set; }
-        //public attachments attachments { get; set; }
+        public public_metrics public_metrics { get; set; }
+        public attachments attachments { get; set; }
     }
 
     public class public_metrics
@@ -24,16 +25,20 @@ namespace PaulieSocialWebApi.Models.TweetModel
         public int like_count { get; set; }
     }
 
-    //public class attachments
-    //{
-    //    public media_keys[] media_keys { get; set; }
-    //}
+    public class attachments
+    {
+        public string[] media_keys { get; set; }
+    }
 
-    //public class media_keys 
-    //{
-    //    public string video { get; set; }
-    //    public string audio { get; set; }
-    //    public string video_id { get; set;}
-    //}
+    public class includes
+    {
+        public media[] media { get; set; }
+    }
+
+    public class media
+    {
+        public string type { get; set; }
+        public string media_key { get; set; }
+    }
 }
 
