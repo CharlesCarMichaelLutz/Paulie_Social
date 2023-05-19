@@ -76,7 +76,15 @@ li a:hover {
   left: 730px;
  }
 
- .form--control {
+ .group--radio {
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  top: 350px;
+  left: 825px;
+ }
+
+ .search--bar {
   position:absolute;
   display:flex;
   top: 425px;
@@ -92,20 +100,18 @@ li a:hover {
   background-color: yellowgreen;
  }
 
- .group--radio {
-  position:absolute;
-  display: flex;
-  flex-direction: row;
-  top: 350px;
-  left: 825px;
+ .submit--button {
+  position: absolute;
+  background-color: orange;
+  top: 490px;
+  left: 860px;
  }
 
- .main--explore {
-  display: flex;
+ .list--tweets{
   position: absolute;
-  left: 650px;
-  top: 550px;
-}
+  top:550px;
+  left:470px;
+ }
 
 /* Random */
 .random--header {
@@ -156,13 +162,6 @@ li a:hover {
 /* 
 Cards
 */
-.chirp--card {
-  flex-direction: column;
-  position: absolute;
-  top: 25%;
-  width: 650px;
-  row-gap: 1rem;
-}
 
 .user--card {
   display: grid;

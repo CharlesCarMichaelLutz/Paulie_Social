@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import UserCard from './UserCard';
-import ChirpCard from './ChirpCard';
-import Popup from './usePopup';
+import VIPCard from '../components/VIPCard';
+//import ChirpCard from '../components/ChirpCard';
+import TweetCard from '../components/TweetCard';
+import Popup from '../components/usePopup';
 import { endpoints } from '../Endpoints';
 import axios from 'axios';
 
@@ -21,7 +22,7 @@ const Random = ({userCards, chirps}) => {
 
   const cards = userCards.map(user => {
     return(
-      <UserCard key={user.username} user={user} />
+      <VIPCard key={user.username} user={user} />
     )
   })
 
@@ -30,7 +31,7 @@ const Random = ({userCards, chirps}) => {
     const item = chirps[random]
     console.log("Item:", item)
     return(
-      <ChirpCard key={item.username} user={user} />
+      <TweetCard key={item.username} user={user} />
     )
   })
 
@@ -54,17 +55,3 @@ const Random = ({userCards, chirps}) => {
 }
 
 export default Random;
-
-/*
-<>
-          <h3>This is a random tweet</h3>
-          <br></br>
-          <p><bold>SlimJim</bold></p>
-          <p>@slimjim99</p>
-          <br></br>
-          <p>
-            It is a beautiful day in the neigborhood
-          </p>
-          </>
-
-*/
