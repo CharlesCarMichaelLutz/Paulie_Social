@@ -7,12 +7,20 @@ import { endpoints } from '../Endpoints';
 import axios from 'axios';
 
 
-const Random = ({userCards, chirps}) => {
+const Random = ({userCards}) => {
 
-  // const [VIPTweet, getVIPTweet] = useState([])
+   const [randomTweet, setRandomTweet] = useState([])
   // const [VIPUser, getVIPUser] = useState([])
 
-  axios.get(endpoints.BASE_URI+`randomVip`)
+  axios
+    .get(endpoints.BASE_URI+`randomVip`)
+    .then((res) => {
+      setRandomTweet(res.data)
+      console.log('VIP search query: ', res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +30,7 @@ const Random = ({userCards, chirps}) => {
 
   const cards = userCards.map(user => {
     return(
-      <VIPCard key={user.username} user={user} />
+      <VIPCard key={user.id} user={user} />
     )
   })
 

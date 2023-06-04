@@ -1,15 +1,29 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState} from 'react'
 import ChirpCard from '../components/ChirpCard';
 //import TweetCard from '../components/TweetCard';
 
 const Explore = ({tweets, radioButtonValue, onInputChange, onRadioButtonChange, getTweets}) => {
 
-    const displayedTerm = tweets.map((tweet) => {
-      return(
-        <ChirpCard key={tweet.id}  passing={tweet} />
-      )
-    }) 
-
+  const displayedTerm = tweets.map((tweetObject) => {
+    const data = tweetObject.data
+    return (
+      //<ChirpCard key={tweet.id}  passing={tweet} />
+      <li key={tweetObject.id}>
+        {data.map((tweet, index) =>(
+          <li key={index}>
+            {/*<h5 className="card-title">{tweet.id}</h5>
+            <h6 className="card-title">{tweet.author_id}</h6>
+        <p className="card-text">{tweet.text}</p>*/}
+            <h6>{tweet.author_id}</h6>
+            <p>{tweet.text}</p>
+            <p>{tweet.public_metrics.like_count}</p>
+            <p>{tweet.public_metrics.retweet_count}</p>
+          </li>
+        ))}
+      </li>
+    )
+  }) 
+  
   return (
     <div className="container">
 
@@ -18,24 +32,22 @@ const Explore = ({tweets, radioButtonValue, onInputChange, onRadioButtonChange, 
       </header>
 
       <form onSubmit={getTweets}>
-        <section class="btn-group" className='group--radio' >
+        <section className='group--radio'>
 
-          <label class="btn btn-outline-success" for='btn-1'>Username</label>
+          <label className="btn btn-outline-success">Username</label>
             <input
               type="radio"
-              name="btnradio"
-              class='btn-check' 
+              className='btn-check' 
               value='username' 
               id="btn-1"
               checked={radioButtonValue === 'username'}
               onChange={onRadioButtonChange}
               />
 
-          <label class="btn btn-outline-success" for='btn-2'>Content</label>
+          <label class="btn btn-outline-success">Content</label>
             <input 
               type="radio"
-              name="btnradio"
-              class='btn-check'
+              className='btn-check'
               value='content' 
               id="btn-2"
               checked={radioButtonValue === 'content'}
@@ -55,12 +67,17 @@ const Explore = ({tweets, radioButtonValue, onInputChange, onRadioButtonChange, 
           </button>
       </form>
 
-      <main className='list--tweets'>
-          {displayedTerm}
-      </main>
+      <div className='list--tweets'>
+        <ul>
+        {displayedTerm}     
+        </ul>
+      </div>
         
     </div>
   )
 }
 
 export default Explore;
+
+//<div class="card"></div>
+

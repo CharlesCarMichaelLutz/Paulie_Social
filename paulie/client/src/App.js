@@ -16,7 +16,7 @@ function App() {
 
   const [searchTerm, setSearchTerm] = useState('')
   const [tweets, setTweets] = useState([])
-  const [radioButtonValue, setRadioButtonValue] =useState('username')
+  const [radioButtonValue, setRadioButtonValue] = useState('username')
 
   const onInputChange = (e) => {
     setSearchTerm(e.target.value)
