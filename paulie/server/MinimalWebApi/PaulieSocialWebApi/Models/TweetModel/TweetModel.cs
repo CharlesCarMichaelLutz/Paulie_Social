@@ -33,12 +33,19 @@ namespace PaulieSocialWebApi.Models.TweetModel
     public class includes
     {
         public media[] media { get; set; }
+        public users[] users { get; set; } 
     }
 
     public class media
     {
         public string type { get; set; }
         public string media_key { get; set; }
+    }
+
+    public class users
+    {
+        public string username { get; set; }
+        public string profile_image_url { get; set; }
     }
 }
 

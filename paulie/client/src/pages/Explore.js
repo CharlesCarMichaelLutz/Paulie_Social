@@ -1,29 +1,26 @@
 import React,{useState} from 'react'
-import ChirpCard from '../components/ChirpCard';
+//import ChirpCard from '../components/ChirpCard';
 //import TweetCard from '../components/TweetCard';
 
 const Explore = ({tweets, radioButtonValue, onInputChange, onRadioButtonChange, getTweets}) => {
 
   const displayedTerm = tweets.map((tweetObject) => {
-    const data = tweetObject.data
-    return (
-      //<ChirpCard key={tweet.id}  passing={tweet} />
-      <li key={tweetObject.id}>
-        {data.map((tweet, index) =>(
-          <li key={index}>
-            {/*<h5 className="card-title">{tweet.id}</h5>
-            <h6 className="card-title">{tweet.author_id}</h6>
-        <p className="card-text">{tweet.text}</p>*/}
-            <h6>{tweet.author_id}</h6>
-            <p>{tweet.text}</p>
-            <p>{tweet.public_metrics.like_count}</p>
-            <p>{tweet.public_metrics.retweet_count}</p>
-          </li>
-        ))}
-      </li>
-    )
-  }) 
-  
+    const dataArray = tweetObject.data
+      return (
+        <li key={tweetObject.id}>
+          {dataArray.map((tweet, index) => (
+              <li key={index}>
+                <h5 className="card-title">{tweet.id}</h5>
+                <h6 className="card-title">{tweet.author_id}</h6>
+                <p className="card-text">{tweet.text}</p>
+                <p>{tweet.public_metrics.like_count}</p>
+                <p>{tweet.public_metrics.retweet_count}</p>
+              </li>
+          ))}
+        </li>
+      )
+  })
+   
   return (
     <div className="container">
 
@@ -69,7 +66,7 @@ const Explore = ({tweets, radioButtonValue, onInputChange, onRadioButtonChange, 
 
       <div className='list--tweets'>
         <ul>
-        {displayedTerm}     
+          {displayedTerm}
         </ul>
       </div>
         
@@ -79,5 +76,31 @@ const Explore = ({tweets, radioButtonValue, onInputChange, onRadioButtonChange, 
 
 export default Explore;
 
-//<div class="card"></div>
 
+/* 
+ 
+<ChirpCard passing={tweet} />
+
+works as expected
+
+   const displayedTerm = tweets.flatMap((tweetObject) => (
+   
+    tweetObject.data.map((tweet, index) => (
+          <li key={index}>
+            <h5 className="card-title">{tweet.id}</h5>
+            <h6 className="card-title">{tweet.author_id}</h6>
+            <p className="card-text">{tweet.text}</p>
+            <p>{tweet.public_metrics.like_count}</p>
+            <p>{tweet.public_metrics.retweet_count}</p>
+          </li>
+    ))
+  )) 
+
+
+   <div className='list--tweets'>
+        <ul>
+          {displayedTerm}
+        </ul>
+      </div>
+
+*/

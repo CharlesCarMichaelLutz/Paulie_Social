@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChirpCard = ({passing}) => {
 
-  let {id, author_id, text, public_metrics, attachments} = passing
+  const {id, author_id, text} = passing
 
   return (
     <li key={id}>
