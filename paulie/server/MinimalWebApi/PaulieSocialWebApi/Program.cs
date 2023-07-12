@@ -28,13 +28,11 @@ services.AddHttpClient<ITweetService, TweetService>(client =>
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", twitterApiKey);
 });
 
-//Add Cors policy
 services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
-//services.AddCors();
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(c =>
@@ -58,17 +56,11 @@ app.UseSwaggerUI(c =>
 app.UseAuthorization();
 app.UseAuthentication();
 
-//Use Cors policy
 app.UseCors(options =>
 {
     options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 });
 
-//app.UseCors();
-
-//Routing
-
-//get tweets by searchTerm
 app.MapGet("/api/explore/content/{searchTerm}",
     async (ITweetService tweetService, string searchTerm) =>
     {
