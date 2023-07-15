@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import userImage from './bigparrot.jpg';
 import chirpImage from './parrot1.jpg';

@@ -1,8 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios';
 import { endpoints } from '../Endpoints';
-//import ChirpCard from '../components/ChirpCard';
-//import TweetCard from '../components/TweetCard';
+import TweetCard from '../components/TweetCard';
 
 const Explore = () => {
 
@@ -35,21 +34,14 @@ const Explore = () => {
         .catch((error) => {
           console.log(error)
         })
-      }
     }
+  }
 
-  const displayedTerm = tweets.flatMap((tweetObject) => (
-   
-    tweetObject.data.map((tweet, index) => (
-          <li key={index}>
-            <h5 className="card-title">{tweet.id}</h5>
-            <h6 className="card-title">{tweet.author_id}</h6>
-            <p className="card-text">{tweet.text}</p>
-            <p>{tweet.public_metrics.like_count}</p>
-            <p>{tweet.public_metrics.retweet_count}</p>
-          </li>
-    ))
-  )) 
+  const renderTweets = tweets.map((tweetObject) => 
+      tweetObject.data.map((tweet, index) => (
+            <TweetCard key={index} tweetList={tweet}/>
+      ))
+  ) 
    
   return (
     <div className="container">
@@ -96,7 +88,7 @@ const Explore = () => {
 
       <div className='list--tweets'>
         <ul>
-          {displayedTerm}
+          {renderTweets}
         </ul>
       </div>
         
@@ -105,36 +97,3 @@ const Explore = () => {
 }
 
 export default Explore;
-
-
-/* 
- 
-<ChirpCard passing={tweet} />
-
-does not work as expected
-
-     const displayedTerm = tweets.map((tweetObject) => {
-    const dataArray = tweetObject.data
-      return (
-        <li key={tweetObject.id}>
-          {dataArray.map((tweet, index) => (
-              <li key={index}>
-                <h5 className="card-title">{tweet.id}</h5>
-                <h6 className="card-title">{tweet.author_id}</h6>
-                <p className="card-text">{tweet.text}</p>
-                <p>{tweet.public_metrics.like_count}</p>
-                <p>{tweet.public_metrics.retweet_count}</p>
-              </li>
-          ))}
-        </li>
-      )
-  })
-
-
-   <div className='list--tweets'>
-        <ul>
-          {displayedTerm}
-        </ul>
-      </div>
-
-*/
