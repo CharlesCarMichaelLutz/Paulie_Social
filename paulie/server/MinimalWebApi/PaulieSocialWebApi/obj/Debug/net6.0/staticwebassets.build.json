@@ -1,11 +1,105 @@
 {
   "Version": 1,
-  "Hash": "U7e8M03EU0o/PP9/zcqFQHTDjFKkVciwCZ+ABcHqhbg=",
+  "Hash": "eHdTrdPwD70nCVegfhMNkziMMBXhfES3M48XUPwdUNg=",
   "Source": "PaulieSocialWebApi",
   "BasePath": "_content/PaulieSocialWebApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "PaulieSocialWebApi\\wwwroot",
+      "Source": "PaulieSocialWebApi",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\css\\main.11b5ac8f.css",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "build/static/css/main.11b5ac8f.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\build\\static\\css\\main.11b5ac8f.css"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\js\\main.c9aa21ba.js",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "build/static/js/main.c9aa21ba.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\build\\static\\js\\main.c9aa21ba.js"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\bigparrot.e4c92d0f8fc90b9c43d9.jpg",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "build/static/media/bigparrot.e4c92d0f8fc90b9c43d9.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\build\\static\\media\\bigparrot.e4c92d0f8fc90b9c43d9.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\parrot1.248af7cfd8ccc2363a11.jpg",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "build/static/media/parrot1.248af7cfd8ccc2363a11.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\build\\static\\media\\parrot1.248af7cfd8ccc2363a11.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\index.html",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
 }

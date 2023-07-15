@@ -44,3 +44,4 @@ C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebAp
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Newtonsoft.dll
+C:\Users\User\Desktop\sdmm\Twitter\paulie\server\MinimalWebApi\PaulieSocialWebApi\bin\Debug\net6.0\PaulieSocialWebApi.staticwebassets.runtime.json

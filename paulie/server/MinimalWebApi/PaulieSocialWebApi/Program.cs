@@ -17,8 +17,8 @@ var services = builder.Services;
 
 services.AddScoped<ITweetService, TweetService>();
 
-services.AddAuthentication();
-services.AddAuthorization();
+//services.AddAuthentication();
+//services.AddAuthorization();
 
 services.AddHttpClient<ITweetService, TweetService>(client =>
 {
@@ -27,12 +27,6 @@ services.AddHttpClient<ITweetService, TweetService>(client =>
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", twitterApiKey);
 });
-
-services.AddCors(c =>
-{
-    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-});
-
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(c =>
@@ -45,42 +39,66 @@ services.AddSwaggerGen(c =>
     });
 });
 
+
+services.AddCors(options =>
+{
+    options.AddPolicy("ReactAppPolicy", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if(app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Paulie Social API V1");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Paulie Social API V1");
+    });
+}
 
-app.UseAuthorization();
-app.UseAuthentication();
+//app.UseAuthorization();
+//app.UseAuthentication();
 
-app.UseCors(options =>
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseStaticFiles();
+
+app.UseCors("ReactAppPolicy");
+
+app.UseEndpoints(endpoints =>
 {
-    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    endpoints.MapGet("/api/explore/content/{searchTerm}",
+        async (ITweetService tweetService, string searchTerm) =>
+        {
+            var result = await tweetService.GetTweetsByContent(searchTerm);
+                return Results.Ok(result);
+        });
+
+    endpoints.MapGet("/api/explore/{username}",
+        async (ITweetService tweetService, string username) =>
+        {
+            var result = await tweetService.GetTweetsByUsername(username);
+                return Results.Ok(result);
+        });
+
+    endpoints.MapGet("/api/randomVip",
+        async (ITweetService tweetService, string id) =>
+        {
+            var result = await tweetService.GetRandomVipTweet(id);
+                return Results.Ok(result);
+        });
+
+    endpoints.MapFallback(async context =>
+    {
+        context.Response.ContentType = "text/html";
+        await context.Response.SendFileAsync(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "index.html"));
+    });
 });
-
-app.MapGet("/api/explore/content/{searchTerm}",
-    async (ITweetService tweetService, string searchTerm) =>
-    {
-        var result = await tweetService.GetTweetsByContent(searchTerm);
-        return Results.Ok(result);
-    });
-
-app.MapGet("/api/explore/{username}",
-    async (ITweetService tweetService, string username) =>
-    {
-        var result = await tweetService.GetTweetsByUsername(username);
-        return Results.Ok(result);
-    });
-
-app.MapGet("/api/randomVip",
-    async (ITweetService tweetService, string id) =>
-    {
-        var result = await tweetService.GetRandomVipTweet(id);
-        return Results.Ok(result);
-    });
 
 app.Run();
 

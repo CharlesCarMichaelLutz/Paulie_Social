@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import userImage from './bigparrot.jpg';
@@ -13,7 +12,7 @@ import NoPage from './pages/NoPage';
 function App() {
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={ <Home /> } />
@@ -22,7 +21,7 @@ function App() {
           <Route path="*" element={ <NoPage /> } />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
