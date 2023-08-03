@@ -1,20 +1,24 @@
 import React from 'react'
-import Media from './Media'
+//import Media from './Media'
 
-const TweetCard = ({tweetList}) => {
+const TweetCard = ({tweetList, user}) => {
 
-  let {id, author_id, text, public_metrics,media} = tweetList
+  const {text, public_metrics} = tweetList
+  const {profile_image_url, username} = user
 
   return (
-        <div key={id} className="card-container">
-            <h5 className="card-title">{id}</h5> {/* profile_image_url */}
-            <h6 className="card-title">{author_id}</h6> {/* username */}
+        <div className="card-container">
+            <div className="user-info">
+                <img src={profile_image_url} alt="userImage"/>
+                <h6 className="card-title">{username}</h6>
+            </div>
             <p className="card-text">{text}</p>
-            <p>{public_metrics.like_count}</p>
-            <p>{public_metrics.retweet_count}</p>
-            {media && <Media mediaData={media}/>} {/* media.url*/}
+            <p>{public_metrics.like_count} likes</p>
+            <p>{public_metrics.retweet_count} retweets</p>
+            {/* media && <Media mediaData={media}/> */}
         </div>
   )
 }
 
 export default TweetCard
+

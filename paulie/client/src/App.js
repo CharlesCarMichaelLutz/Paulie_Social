@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import userImage from './bigparrot.jpg';
-import chirpImage from './parrot1.jpg';
+//import userImage from './bigparrot.jpg';
+//import chirpImage from './parrot1.jpg';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import Explore from './pages/Explore';

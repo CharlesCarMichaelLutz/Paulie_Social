@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import axios from 'axios';
-import { endpoints } from '../Endpoints';
+//import { endpoints } from '../Endpoints';
 import TweetCard from '../components/TweetCard';
 
 const Explore = () => {
@@ -22,11 +22,11 @@ const Explore = () => {
 
     if(searchTerm) {
       const apiEndpoint = radioButtonValue === 'username' 
-        ? `explore/${searchTerm}` 
-        : `explore/content/${searchTerm}`
+        ? `/api/explore/${searchTerm}` 
+        : `/api/explore/content/${searchTerm}`
 
-      axios
-        .get(endpoints.BASE_URI + apiEndpoint)
+        axios
+        .get(apiEndpoint)
         .then((res) => {
           setTweets(res.data)
           console.log('search query: ', res.data)
@@ -37,22 +37,27 @@ const Explore = () => {
     }
   }
 
-  const renderTweets = tweets.map((tweetObject) => 
-      tweetObject.data.map((tweet, index) => (
-            <TweetCard key={index} tweetList={tweet}/>
-      ))
-  ) 
+  const renderTweets = tweets.length === 0 ? 
+    <p>No tweets found</p> :
+      tweets.map((tweetObject) => 
+          tweetObject.data.map((tweet, index) => (
+                <TweetCard 
+                  key={index} 
+                  tweetList={tweet} 
+                  //media={tweetObject.includes.media}
+                  user={tweetObject.includes.users}
+                />
+          ))
+    ) 
    
   return (
     <div className="container">
-
       <header className='explore--header'>
-        <h2>Explore Chirps from Paulie Social</h2>   
+        <h2>Explore Chirps from Paulie Social</h2> 
       </header>
 
       <form onSubmit={getTweets}>
         <section className='group--radio'>
-
           <label className="btn btn-outline-success">Username</label>
             <input
               type="radio"
@@ -61,17 +66,16 @@ const Explore = () => {
               id="btn-1"
               checked={radioButtonValue === 'username'}
               onChange={onRadioButtonChange}
-              />
-
+            />
           <label class="btn btn-outline-success">Content</label>
             <input 
               type="radio"
               className='btn-check'
-              value='content' 
+              value='content'
               id="btn-2"
               checked={radioButtonValue === 'content'}
               onChange={onRadioButtonChange}
-              />
+            />
         </section>    
 
             <input 
@@ -80,7 +84,7 @@ const Explore = () => {
               className='search--bar'
               //value={searchTerm}
               onChange={onInputChange}
-              />
+            />
           <button type="submit" className="submit--button">
             Get Tweets
           </button>
@@ -91,7 +95,6 @@ const Explore = () => {
           {renderTweets}
         </ul>
       </div>
-        
     </div>
   )
 }

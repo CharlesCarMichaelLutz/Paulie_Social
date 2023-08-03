@@ -17,7 +17,7 @@ var services = builder.Services;
 
 services.AddScoped<ITweetService, TweetService>();
 
-//services.AddAuthentication();
+services.AddAuthentication();
 //services.AddAuthorization();
 
 services.AddHttpClient<ITweetService, TweetService>(client =>
@@ -62,7 +62,7 @@ if(app.Environment.IsDevelopment())
 }
 
 //app.UseAuthorization();
-//app.UseAuthentication();
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 app.UseRouting();
