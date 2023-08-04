@@ -45,7 +45,7 @@ const Explore = () => {
                   key={index} 
                   tweetList={tweet} 
                   //media={tweetObject.includes.media}
-                  user={tweetObject.includes.users}
+                  user={tweetObject.includes.users[index]}
                 />
           ))
     ) 
@@ -100,3 +100,20 @@ const Explore = () => {
 }
 
 export default Explore;
+
+/*
+
+  const renderTweets = tweets.length === 0 ? 
+    <p>No tweets found</p> :
+      tweets.map((tweetObject) => 
+          tweetObject.data.map((tweet, index) => (
+                <TweetCard 
+                  key={index} 
+                  tweetList={tweet} 
+                  //media={tweetObject.includes.media}
+                  user={tweetObject.includes.users}
+                />
+          ))
+    ) 
+
+*/
