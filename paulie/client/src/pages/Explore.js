@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import axios from 'axios';
-//import { endpoints } from '../Endpoints';
 import TweetCard from '../components/TweetCard';
 
 const Explore = () => {
@@ -37,19 +36,30 @@ const Explore = () => {
     }
   }
 
-  const renderTweets = tweets.length === 0 ? 
-    <p>No tweets found</p> :
-      tweets.map((tweetObject) => 
-          tweetObject.data.map((tweet, index) => (
-                <TweetCard 
-                  key={index} 
-                  tweetList={tweet} 
-                  //media={tweetObject.includes.media}
-                  user={tweetObject.includes.users[index]}
-                />
-          ))
-    ) 
-   
+  const renderTweets = tweets.length === 0 ? (
+    <p>No tweets found</p>
+) : (
+    tweets.map((tweetObject) =>
+        tweetObject.data.map((tweet, index) => {
+            const media = tweetObject.includes.media[index];
+
+            if (media) {
+                return (
+                    <TweetCard
+                        key={index}
+                        tweetList={tweet}
+                        media={media}
+                        user={tweetObject.includes.users[index]}
+                    />
+                );
+            } else {
+                return null; 
+            }
+        })
+    )
+);
+
+
   return (
     <div className="container">
       <header className='explore--header'>
@@ -100,20 +110,3 @@ const Explore = () => {
 }
 
 export default Explore;
-
-/*
-
-  const renderTweets = tweets.length === 0 ? 
-    <p>No tweets found</p> :
-      tweets.map((tweetObject) => 
-          tweetObject.data.map((tweet, index) => (
-                <TweetCard 
-                  key={index} 
-                  tweetList={tweet} 
-                  //media={tweetObject.includes.media}
-                  user={tweetObject.includes.users}
-                />
-          ))
-    ) 
-
-*/
