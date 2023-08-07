@@ -41,20 +41,16 @@ const Explore = () => {
 ) : (
     tweets.map((tweetObject) =>
         tweetObject.data.map((tweet, index) => {
-            const media = tweetObject.includes.media[index];
+            const mediaData = tweetObject.includes && tweetObject.includes.media && tweetObject.includes.media[index];
 
-            if (media) {
                 return (
                     <TweetCard
                         key={index}
                         tweetList={tweet}
-                        media={media}
+                        mediaData={mediaData}
                         user={tweetObject.includes.users[index]}
                     />
-                );
-            } else {
-                return null; 
-            }
+              );
         })
     )
 );

@@ -2,43 +2,38 @@ import React from 'react'
 
 const Media = ({mediaData}) => {
 
+  const {type, url, variants} = mediaData
+
   return (
     <div>
-      {mediaData.map((tweet, index) => {
+      {type === 'photo' && (
+        <img src={url} alt="image"/>
+      )}
 
-        switch(tweet.type) {
-          case 'photo':
-              return <img key={index} src={tweet.url} alt="image"/>
-          case 'animated_gif':
-            if(Array.isArray(tweet.variants)) {
-              return (
-                tweet.variants.map((variant, varIndex) => (
+      {(type === 'animated_gif' || type === 'video') && (
+        <div>
+          {variants && typeof variants === 'object' && (
+            <>
+              {Object.keys(variants).map((variantKey, varIndex) => {
+                const variant = variants[variantKey]
+                return (
                   <div key={varIndex}>
-                  {console.log('gifUrl:', variant.url)}
+                    {console.log(type === 'animated_gif' ? 'gifUrl:' : 'videoUrl', variant.url
+                    )}
+                    {type === 'animated_gif' ? (
                       <img src={variant.url} alt="gif"/>
+                    ) : (
+                      <video controls>
+                        <source src={variant.url} type="video/mp4" />
+                      </video>
+                    )}
                   </div>
-                ))
-              ) 
-            }
-            return null
-          case 'video':
-            if(Array.isArray(tweet.variants)) {
-              return (
-                tweet.variants.map((variant, varIndex) => (
-                  <div key={varIndex}>
-                    <video controls>
-                    {console.log('videoUrl:', variant.url)}
-                        <source src={variant.url}type="video/mp4"/>
-                     </video>
-                  </div>
-                ))
-              ) 
-            }
-            return null
-          default:
-            return null
-        }
-       })}
+                )
+              })}
+            </>
+          )}
+        </div>
+      )}
     </div>
   )
 }

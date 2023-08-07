@@ -1,10 +1,7 @@
 import React from 'react'
 import Media from './Media'
 
-const TweetCard = ({tweetList, user, media}) => {
-
-  const {text, public_metrics} = tweetList
-  const {profile_image_url ,username} = user
+const TweetCard = ({ tweetList: { text, public_metrics }, user: { profile_image_url, username }, mediaData}) => {
 
   return (
         <div className="card-container">
@@ -15,7 +12,7 @@ const TweetCard = ({tweetList, user, media}) => {
             <p className="card-text">{text}</p>
             <p>{public_metrics.like_count} likes</p>
             <p>{public_metrics.retweet_count} retweets</p>
-            {media && <Media mediaData={media}/>}
+            {mediaData && <Media mediaData={mediaData}/>}
         </div>
   )
 }
