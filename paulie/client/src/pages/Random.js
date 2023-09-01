@@ -1,6 +1,5 @@
 // import React, { useState } from 'react';
 // import VIPCard from '../components/VIPCard';
-// //import ChirpCard from '../components/ChirpCard';
 // import TweetCard from '../components/TweetCard';
 // import Popup from '../components/usePopup';
 // import { endpoints } from '../Endpoints';
@@ -10,7 +9,31 @@
 // const Random = ({userCards}) => {
 
 //    const [randomTweet, setRandomTweet] = useState([])
-//   // const [VIPUser, getVIPUser] = useState([])
+//   const [VIPUser, setVIPUser] = useState([])
+
+//   const userCard = 
+//     [ 
+//       { userImage:,
+//         username: ,
+//         userhandle:
+//       },
+//       { userImage:,
+//         username: ,
+//         userhandle:
+//       },
+//       { userImage:,
+//         username: ,
+//         userhandle:
+//       },
+//       { userImage:,
+//         username: ,
+//         userhandle:
+//       },
+//       { userImage:,
+//         username: ,
+//         userhandle:
+//       },
+//     ]
 
 //   axios
 //     .get(endpoints.BASE_URI+`randomVip`)

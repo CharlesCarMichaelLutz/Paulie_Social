@@ -1,108 +1,111 @@
-import React,{useState} from 'react'
-import axios from 'axios';
-import TweetCard from '../components/TweetCard';
+import React, { useState } from "react";
+import axios from "axios";
+import TweetCard from "../components/TweetCard";
 
 const Explore = () => {
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const [tweets, setTweets] = useState([])
-  const [radioButtonValue, setRadioButtonValue] = useState('username')
+  const [searchTerm, setSearchTerm] = useState("");
+  const [tweets, setTweets] = useState([]);
+  const [radioButtonValue, setRadioButtonValue] = useState("username");
 
   const onInputChange = (e) => {
-    setSearchTerm(e.target.value)
-  }
+    setSearchTerm(e.target.value);
+  };
 
   const onRadioButtonChange = (e) => {
-    setRadioButtonValue(e.target.value)
-  }
+    setRadioButtonValue(e.target.value);
+  };
 
   const getTweets = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if(searchTerm) {
-      const apiEndpoint = radioButtonValue === 'username' 
-        ? `/api/explore/${searchTerm}` 
-        : `/api/explore/content/${searchTerm}`
+    if (searchTerm) {
+      const apiEndpoint =
+        radioButtonValue === "username"
+          ? `/api/explore/${searchTerm}`
+          : `/api/explore/content/${searchTerm}`;
 
-        axios
+      axios
         .get(apiEndpoint)
         .then((res) => {
-          setTweets(res.data)
-          console.log('search query: ', res.data)
+          setTweets(res.data);
+          console.log("search query: ", res.data);
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
-  }
+  };
 
-  const renderTweets = tweets.length === 0 ? (
-    <p>No tweets found</p>
-) : (
-    tweets.map((tweetObject) =>
+  const renderTweets =
+    tweets.length === 0 ? (
+      <p>No tweets found</p>
+    ) : (
+      tweets.map((tweetObject) =>
         tweetObject.data.map((tweet, index) => {
-            const mediaData = tweetObject.includes && tweetObject.includes.media && tweetObject.includes.media[index];
+          const mediaData =
+            tweetObject.includes &&
+            tweetObject.includes.media &&
+            tweetObject.includes.media[index];
 
-                return (
-                    <TweetCard
-                        key={index}
-                        tweetList={tweet}
-                        mediaData={mediaData}
-                        user={tweetObject.includes.users[index]}
-                    />
-              );
+          return (
+            <div className="col-md-6 mb-4">
+              <TweetCard
+                key={index}
+                tweetList={tweet}
+                mediaData={mediaData}
+                user={tweetObject.includes.users[index]}
+              />
+            </div>
+          );
         })
-    )
-);
-
+      )
+    );
 
   return (
     <div className="container">
-      <header className='explore--header'>
-        <h2>Explore Chirps from Paulie Social</h2> 
+      <header className="explore--header">
+        <h2>Explore Chirps from Paulie Social</h2>
       </header>
 
       <form onSubmit={getTweets}>
-        <section className='group--radio'>
+        <section className="group--radio">
           <label className="btn btn-outline-success">Username</label>
-            <input
-              type="radio"
-              className='btn-check' 
-              value='username' 
-              id="btn-1"
-              checked={radioButtonValue === 'username'}
-              onChange={onRadioButtonChange}
-            />
+          <input
+            type="radio"
+            className="btn-check"
+            value="username"
+            id="btn-1"
+            checked={radioButtonValue === "username"}
+            onChange={onRadioButtonChange}
+          />
           <label class="btn btn-outline-success">Content</label>
-            <input 
-              type="radio"
-              className='btn-check'
-              value='content'
-              id="btn-2"
-              checked={radioButtonValue === 'content'}
-              onChange={onRadioButtonChange}
-            />
-        </section>    
+          <input
+            type="radio"
+            className="btn-check"
+            value="content"
+            id="btn-2"
+            checked={radioButtonValue === "content"}
+            onChange={onRadioButtonChange}
+          />
+        </section>
 
-            <input 
-              placeholder="explore...."
-              type="text"
-              className='search--bar'
-              //value={searchTerm}
-              onChange={onInputChange}
-            />
-          <button type="submit" className="submit--button">
-            Get Tweets
-          </button>
+        <input
+          placeholder="explore...."
+          type="text"
+          className="search--bar"
+          //value={searchTerm}
+          onChange={onInputChange}
+        />
+        <button type="submit" className="submit--button">
+          Get Tweets
+        </button>
       </form>
 
-      <div className='list--tweets'>
-        <ul>
-          {renderTweets}
-        </ul>
+      <div className="list--tweets">
+        <ul>{renderTweets}</ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Explore;

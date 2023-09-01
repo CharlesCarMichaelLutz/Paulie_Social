@@ -107,10 +107,15 @@ li a:hover {
   left: 860px;
  }
 
- .list--tweets{
+ /* .list--tweets{
   position: absolute;
   top:550px;
   left:470px;
+ } */
+
+ .list--tweets{
+  margin: 0 auto;
+  width: 50%
  }
 
 /* Random */
@@ -163,10 +168,10 @@ li a:hover {
 Cards
 */
 
-.user--card {
+/* .user--card {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: auto;
   position:relative;
   top: 300px;
-}
+} */
