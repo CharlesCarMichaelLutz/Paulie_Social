@@ -77,21 +77,21 @@ app.UseEndpoints(endpoints =>
         async (ITweetService tweetService, string searchTerm) =>
         {
             var result = await tweetService.GetTweetsByContent(searchTerm);
-                return Results.Ok(result);
+            return Results.Ok(result);
         });
 
     endpoints.MapGet("/api/explore/{username}",
         async (ITweetService tweetService, string username) =>
         {
             var result = await tweetService.GetTweetsByUsername(username);
-                return Results.Ok(result);
+            return Results.Ok(result);
         });
 
     endpoints.MapGet("/api/randomVip",
         async (ITweetService tweetService, string id) =>
         {
             var result = await tweetService.GetRandomVipTweet(id);
-                return Results.Ok(result);
+            return Results.Ok(result);
         });
 
     endpoints.MapFallback(async context =>
@@ -102,5 +102,7 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+
 
 

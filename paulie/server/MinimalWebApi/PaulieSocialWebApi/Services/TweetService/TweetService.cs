@@ -59,7 +59,7 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 
             var idJson = await userIdRequest.Content.ReadAsStringAsync();
             var user = JsonConvert.DeserializeObject<UserIdModel>(idJson);
-            var endpointListTweets = $"users/{user.data.username}/tweets";
+            var endpointListTweets = $"users/{user.data.id}/tweets";
             //var parameters = $"{endpointListTweets}?{_fieldAndExpansions}";
 
             var parameters = $"{endpointListTweets}?tweet.fields=attachments,author_id,public_metrics,source&media.fields=url,variants,media_key,type&expansions=attachments.media_keys,author_id&user.fields=profile_image_url&max_results=15";
