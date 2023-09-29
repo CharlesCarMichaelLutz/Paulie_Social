@@ -104,8 +104,8 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
             }
 
             string vipUserId = VipUsersId[index];
-            //var endpointListTweets = $"users/{vipUserId}/tweets?{_fieldsAndExpansions}";
-            var endpointListTweets = $"users/{vipUserId}/tweets?tweet.fields=author_id,public_metrics&media.fields=url,git variants,public_metrics,media_key,type&expansions=attachments.media_keys,author_id&max_results=15&exclude=retweets,replies&user.fields=profile_image_url";
+            var endpointListTweets = $"users/{vipUserId}/tweets?tweet.fields=attachments,author_id,public_metrics,source&media.fields=url,variants,media_key,type&expansions=attachments.media_keys,author_id&user.fields=profile_image_url&max_results=15&exclude=retweets,replies";
+
 
             HttpResponseMessage response = await _httpClient.GetAsync(endpointListTweets).ConfigureAwait(false);
 
