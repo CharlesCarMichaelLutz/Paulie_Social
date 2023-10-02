@@ -13,18 +13,15 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
     public class TweetService : ITweetService
     {
         private readonly HttpClient _httpClient;
-        //private readonly FieldsAndExpansions _fieldsAndExpansions;
         public TweetService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            //_fieldsAndExpansions = fieldsAndExpansions;
         }
         public async Task<IEnumerable<TweetModel>> GetTweetsByContent(string searchTerm)
         {
             List<TweetModel> tweets = new List<TweetModel>();
 
             var endpoint = $"tweets/search/recent?query={searchTerm}";
-            //var parameters = $"{endpoint}&{_extras}";
             var parameters = $"{endpoint}&tweet.fields=attachments,author_id,public_metrics,source&expansions=attachments.media_keys,author_id&media.fields=url,variants,media_key,type&user.fields=profile_image_url&max_results=15";
 
             HttpResponseMessage response = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
@@ -60,7 +57,6 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
             var idJson = await userIdRequest.Content.ReadAsStringAsync();
             var user = JsonConvert.DeserializeObject<UserIdModel>(idJson);
             var endpointListTweets = $"users/{user.data.id}/tweets";
-            //var parameters = $"{endpointListTweets}?{_fieldAndExpansions}";
 
             var parameters = $"{endpointListTweets}?tweet.fields=attachments,author_id,public_metrics,source&media.fields=url,variants,media_key,type&expansions=attachments.media_keys,author_id&user.fields=profile_image_url&max_results=15";
 

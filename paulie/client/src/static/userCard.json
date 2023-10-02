@@ -1,0 +1,36 @@
+[
+  {
+    "userImage": "https://pbs.twimg.com/profile_images/1436819851566219267/HEffZjvP_normal.jpg",
+    "username": "Fireship",
+    "userhandle": "fireship_dev",
+    "userId": "850333483339730945"
+  },
+
+  {
+    "userImage": "https://pbs.twimg.com/profile_images/1634058036934500352/b4F1eVpJ_normal.jpg",
+    "username": "OpenAI",
+    "userhandle": "OpenAI",
+    "userId": "4398626122"
+  },
+
+  {
+    "userImage": "https://pbs.twimg.com/profile_images/1433157029707800580/wCOutmH3_normal.jpg",
+    "username": "Exercism 💙",
+    "userhandle": "exercism_io",
+    "userId": "1512200244"
+  },
+
+  {
+    "userImage": "https://pbs.twimg.com/profile_images/1698663217889738752/_sWdQ3bq_normal.jpg",
+    "username": "Raspberry Pi",
+    "userhandle": "Raspberry_Pi",
+    "userId": "302666251"
+  },
+
+  {
+    "userImage": "https://pbs.twimg.com/profile_images/1592585812650008579/8JavCOnE_normal.png",
+    "username": "Alchemy | The web3 developer platform",
+    "userhandle": "AlchemyPlatform",
+    "userId": "953748782394499072"
+  }
+]

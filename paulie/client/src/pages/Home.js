@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../bigparrot.jpg";
+import bigParrot from "../static/bigparrot.jpg";
 
 const Home = () => {
   return (
@@ -22,7 +22,7 @@ const Home = () => {
           Paulie Social.
         </p>
 
-        <img src={image} height={400} width={400} />
+        <img src={bigParrot} height={400} width={400} alt="home app logo" />
       </main>
     </div>
   );

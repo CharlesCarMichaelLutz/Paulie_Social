@@ -1,88 +1,63 @@
-// import React, { useState } from 'react';
-// import VIPCard from '../components/VIPCard';
-// import TweetCard from '../components/TweetCard';
-// import Popup from '../components/usePopup';
-// import { endpoints } from '../Endpoints';
-// import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import VIPCard from "../components/VIPCard";
+import PopupModal from "../components/PopupModal";
+import axios from "axios";
+import VipCardData from "../static/userCard.json";
+import TweetCard from "../components/TweetCard";
 
+const Random = () => {
+  const [randomTweet, setRandomTweet] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-// const Random = ({userCards}) => {
+  useEffect(() => {
+    if (userId) {
+      getRandomTweet(userId);
+    }
+  }, [userId]);
 
-//    const [randomTweet, setRandomTweet] = useState([])
-//   const [VIPUser, setVIPUser] = useState([])
+  const getRandomTweet = async (id) => {
+    const vip = process.env.REACT_APP_WEBAPI_URL + `/api/randomVip/${id}`;
 
-//   const userCard = 
-//     [ 
-//       { userImage:,
-//         username: ,
-//         userhandle:
-//       },
-//       { userImage:,
-//         username: ,
-//         userhandle:
-//       },
-//       { userImage:,
-//         username: ,
-//         userhandle:
-//       },
-//       { userImage:,
-//         username: ,
-//         userhandle:
-//       },
-//       { userImage:,
-//         username: ,
-//         userhandle:
-//       },
-//     ]
+    try {
+      const response = await axios.get(vip);
+      setRandomTweet(response.data);
+      console.log("Random Tweet:", response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setRandomTweet([]);
+      setUserId(null);
+    }
+  };
 
-//   axios
-//     .get(endpoints.BASE_URI+`randomVip`)
-//     .then((res) => {
-//       setRandomTweet(res.data)
-//       console.log('VIP search query: ', res.data)
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     })
+  function handleClickVIPCard(id) {
+    setUserId(id);
+  }
 
-//   const [isOpen, setIsOpen] = useState(false);
+  const cards = VipCardData.map((vipIndex) => {
+    return (
+      <VIPCard
+        key={vipIndex.userId}
+        user={vipIndex}
+        eventHandler={() => handleClickVIPCard(vipIndex.userId)}
+      />
+    );
+  });
 
-//   const togglePopup = () => {
-//     setIsOpen(!isOpen)
-//   }
+  return (
+    <>
+      <header className="random--header">
+        <h3>Get Random Chirps from your favorite users below</h3>
+      </header>
 
-//   const cards = userCards.map(user => {
-//     return(
-//       <VIPCard key={user.id} user={user} />
-//     )
-//   })
+      <div className="user--card">{cards}</div>
 
-//   const content = chirps.map(user => {
-//     const random = Math.floor(Math.random() * chirps.length)
-//     const item = chirps[random]
-//     console.log("Item:", item)
-//     return(
-//       <TweetCard key={item.username} user={user} />
-//     )
-//   })
+      <PopupModal open={isOpen} onClose={() => setIsOpen(false)}>
+        {randomTweet && <TweetCard {...randomTweet} />}
+      </PopupModal>
+    </>
+  );
+};
 
-//   return (
-//     <div>
-//       <header className='random--header'>
-//         <h3>Get Random Chirps from your favorite users below</h3>  
-//       </header>
-
-//       <div class="container" className='user--card' onClick={togglePopup} >
-//         {cards}
-//       </div>
- 
-//       {isOpen && <Popup       
-//         content={content}
-//         handleClose={togglePopup}
-//       />}
-//     </div>
-//   )
-
-// }
-
-// export default Random;
+export default Random;

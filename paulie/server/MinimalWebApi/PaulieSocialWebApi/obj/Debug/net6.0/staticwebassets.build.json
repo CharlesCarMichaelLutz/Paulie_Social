@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7V+pAk7/Uzk00ns4yZiGiZMWmEZxDld05qfMzEUJbLY=",
+  "Hash": "ZIiEh4tYtNZa+nOMfMKgSqC3ibLPI/Eu9prnJ6340zk=",
   "Source": "PaulieSocialWebApi",
   "BasePath": "_content/PaulieSocialWebApi",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\css\\main.1866b758.css",
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\css\\main.56869e64.css",
       "SourceId": "PaulieSocialWebApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
       "BasePath": "_content/PaulieSocialWebApi",
-      "RelativePath": "build/static/css/main.1866b758.css",
+      "RelativePath": "build/static/css/main.56869e64.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,15 +31,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\build\\static\\css\\main.1866b758.css"
+      "OriginalItemSpec": "wwwroot\\build\\static\\css\\main.56869e64.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\js\\main.d3b4c956.js",
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\js\\main.4476ce3c.js",
       "SourceId": "PaulieSocialWebApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
       "BasePath": "_content/PaulieSocialWebApi",
-      "RelativePath": "build/static/js/main.d3b4c956.js",
+      "RelativePath": "build/static/js/main.4476ce3c.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,7 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\build\\static\\js\\main.d3b4c956.js"
+      "OriginalItemSpec": "wwwroot\\build\\static\\js\\main.4476ce3c.js"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\bigparrot.e4c92d0f8fc90b9c43d9.jpg",
