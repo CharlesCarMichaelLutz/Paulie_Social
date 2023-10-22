@@ -102,7 +102,6 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
             string vipUserId = VipUsersId[index];
             var endpointListTweets = $"users/{vipUserId}/tweets?tweet.fields=attachments,author_id,public_metrics,source&media.fields=url,variants,media_key,type&expansions=attachments.media_keys,author_id&user.fields=profile_image_url&max_results=15&exclude=retweets,replies";
 
-
             HttpResponseMessage response = await _httpClient.GetAsync(endpointListTweets).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
@@ -114,8 +113,17 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
             var tweetResponse = JsonConvert.DeserializeObject<TweetModel>(jsonString);
 
             int getIndexOfRandomTweet = random.Next(0, tweetResponse.Data.Length);
+
             TweetData selectedTweetData = tweetResponse.Data[getIndexOfRandomTweet];
-            TweetModel selectedTweet = new TweetModel { Data = new[] {selectedTweetData} };
+
+            includes select = tweetResponse.Includes;
+
+
+            TweetModel selectedTweet = new TweetModel
+            {
+                Data = new[] { selectedTweetData },
+                Includes = select
+            };
                    
             return selectedTweet;
         }

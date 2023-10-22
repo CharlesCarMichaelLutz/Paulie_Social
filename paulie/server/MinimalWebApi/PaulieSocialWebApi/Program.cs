@@ -87,7 +87,7 @@ app.UseEndpoints(endpoints =>
             return Results.Ok(result);
         });
 
-    endpoints.MapGet("/api/randomVip",
+    endpoints.MapGet("/api/randomVip/{id}",
         async (ITweetService tweetService, string id) =>
         {
             var result = await tweetService.GetRandomVipTweet(id);

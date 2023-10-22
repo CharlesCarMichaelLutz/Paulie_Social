@@ -3,7 +3,6 @@ import VIPCard from "../components/VIPCard";
 import PopupModal from "../components/PopupModal";
 import axios from "axios";
 import VipCardData from "../static/userCard.json";
-import TweetCard from "../components/TweetCard";
 
 const Random = () => {
   const [randomTweet, setRandomTweet] = useState([]);
@@ -17,21 +16,23 @@ const Random = () => {
   }, [userId]);
 
   const getRandomTweet = async (id) => {
-    const vip = process.env.REACT_APP_WEBAPI_URL + `/api/randomVip/${id}`;
+    //const vip = endpoints.BASE_URI + `randomVip/${id}`
+    const vip = `/api/randomVip/${id}`;
 
     try {
       const response = await axios.get(vip);
       setRandomTweet(response.data);
+      setIsOpen(true);
       console.log("Random Tweet:", response.data);
     } catch (error) {
       console.log(error);
     } finally {
-      setRandomTweet([]);
+      //setRandomTweet([])
       setUserId(null);
     }
   };
 
-  function handleClickVIPCard(id) {
+  function handleClick(id) {
     setUserId(id);
   }
 
@@ -40,7 +41,7 @@ const Random = () => {
       <VIPCard
         key={vipIndex.userId}
         user={vipIndex}
-        eventHandler={() => handleClickVIPCard(vipIndex.userId)}
+        eventHandler={() => handleClick(vipIndex.userId)}
       />
     );
   });
@@ -48,14 +49,16 @@ const Random = () => {
   return (
     <>
       <header className="random--header">
-        <h3>Get Random Chirps from your favorite users below</h3>
+        <h1>Get random tweet from favorites below</h1>
       </header>
 
       <div className="user--card">{cards}</div>
 
-      <PopupModal open={isOpen} onClose={() => setIsOpen(false)}>
-        {randomTweet && <TweetCard {...randomTweet} />}
-      </PopupModal>
+      <PopupModal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        vipTweetData={randomTweet}
+      />
     </>
   );
 };

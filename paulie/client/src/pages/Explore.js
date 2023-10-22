@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TweetCard from "../components/TweetCard";
 
@@ -6,6 +6,15 @@ const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [tweets, setTweets] = useState([]);
   const [radioButtonValue, setRadioButtonValue] = useState("username");
+
+  useEffect(
+    (tweets) => {
+      if (tweets) {
+        setTweets(tweets);
+      }
+    },
+    [tweets]
+  );
 
   const onInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -22,9 +31,8 @@ const Explore = () => {
     if (searchTerm) {
       const apiEndpoint =
         radioButtonValue === "username"
-          ? process.env.REACT_APP_WEBAPI_URL + `/api/explore/${searchTerm}`
-          : process.env.REACT_APP_WEBAPI_URL +
-            `/api/explore/content/${searchTerm}`;
+          ? `/api/explore/${searchTerm}`
+          : `/api/explore/content/${searchTerm}`;
 
       try {
         const response = await axios.get(apiEndpoint);
@@ -35,6 +43,7 @@ const Explore = () => {
         setTweets([]);
       } finally {
         setSearchTerm("");
+        //setRadioButtonValue(null)
       }
     }
   };
@@ -44,7 +53,6 @@ const Explore = () => {
       return null;
     }
     const dataMediaKey = tweet.attachments.media_keys[0];
-
     return mediaArray.find((media) => media.media_key === dataMediaKey);
   };
 
@@ -57,87 +65,98 @@ const Explore = () => {
   // }
 
   const renderTweets =
-    tweets.length === 0 ? (
-      <p>No Tweets found</p>
-    ) : (
-      tweets.map((tweetObject, tweetIndex) =>
-        tweetObject.data.map((tweet, dataIndex) => {
-          // const mediaData =
-          //   tweetObject.includes &&
-          //   tweetObject.includes.media &&
-          //   tweetObject.includes.media[index]
+    tweets.length === 0
+      ? ""
+      : tweets.map((tweetObject) =>
+          tweetObject.data.map((tweetData, dataIndex) => {
+            const mediaData = findMediaForTweet(
+              tweetData,
+              tweetObject.includes.media
+            );
 
-          const mediaData = findMediaForTweet(
-            tweet,
-            tweetObject.includes.media
-          );
+            const userData =
+              radioButtonValue === "username"
+                ? tweetObject.includes.users[0]
+                : tweetObject.includes.users[dataIndex];
 
-          const userData =
-            radioButtonValue === "username"
-              ? tweetObject.includes.users[0]
-              : tweetObject.includes.users.id[dataIndex];
-
-          return (
-            <div className="col-md-6 mb-4">
-              <TweetCard
-                key={dataIndex}
-                tweetList={tweet}
-                mediaData={mediaData}
-                users={userData}
-              />
-            </div>
-          );
-        })
-      )
-    );
+            return (
+              <div className="render--explore">
+                <TweetCard
+                  key={dataIndex}
+                  tweetList={tweetData}
+                  mediaData={mediaData}
+                  users={userData}
+                />
+              </div>
+            );
+          })
+        );
 
   return (
     <>
       <div className="container">
         <header className="explore--header">
-          <h2>Explore Chirps from Paulie Social</h2>
+          <h1>Explore Tweets with Paulie Social</h1>
         </header>
 
         <form onSubmit={getTweets}>
           <section className="group--radio">
-            <label className="btn btn-outline-success">Username</label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              value="username"
-              id="btn-1"
-              checked={radioButtonValue === "username"}
-              onChange={onRadioButtonChange}
-            />
-
-            <label className="btn btn-outline-success">Content</label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              value="content"
-              id="btn-2"
-              checked={radioButtonValue === "content"}
-              onChange={onRadioButtonChange}
-            />
+            <div className="radio">
+              <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                <label
+                  className={`btn btn-primary ${
+                    radioButtonValue === "username" ? "active" : ""
+                  } green-button`}
+                  htmlFor="button1"
+                >
+                  <input
+                    type="radio"
+                    value="username"
+                    id="button1"
+                    className="hidden-radio"
+                    checked={radioButtonValue === "username"}
+                    onChange={onRadioButtonChange}
+                  />
+                  Username
+                </label>
+                <label
+                  className={`btn btn-primary ${
+                    radioButtonValue === "content" ? "active" : ""
+                  } green-button`}
+                  htmlFor="button2"
+                >
+                  <input
+                    type="radio"
+                    value="content"
+                    id="button2"
+                    className="hidden-radio"
+                    checked={radioButtonValue === "content"}
+                    onChange={onRadioButtonChange}
+                  />
+                  Content
+                </label>
+              </div>
+            </div>
           </section>
 
           <input
-            placeholder="explore...."
+            placeholder="search...."
             type="text"
             className="search--bar"
             value={searchTerm}
             onChange={onInputChange}
           />
-
           <button type="submit" className="submit--button">
             Get Tweets
           </button>
         </form>
 
-        <div className="list--tweets">
-          <ul>{renderTweets}</ul>
+        <div className="list-container">
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              <ul>{renderTweets}</ul>
+            </div>
+          </div>
         </div>
       </div>
     </>

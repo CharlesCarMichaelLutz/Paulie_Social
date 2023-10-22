@@ -1,5 +1,6 @@
 import React from "react";
 import Media from "./Media";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const TweetCard = ({
   tweetList: { text, public_metrics },
@@ -8,29 +9,33 @@ const TweetCard = ({
 }) => {
   return (
     <>
-      <div className="card card-container">
-        <div className="card-body user-info">
+      <div className="card card-custom">
+        <div className="card-header">
           <img
             src={profile_image_url}
-            alt="profile Image"
-            className="profile-image"
+            alt="user image avatar"
+            className="avatar"
           />
-
-          <h6 className="card-title">{username}</h6>
+          <h4 className="card-title">{username}</h4>
         </div>
-
-        <p className="card-text tweet-text">{text}</p>
-
+        <hr className="card-line" />
+        <div className="card-body">
+          <div className="card-text">{text}</div>
+        </div>
         {mediaData && <Media mediaData={mediaData} />}
-
+        <hr className="card-line" />
         <div className="card-footer">
-          <p className="card-text likes-count">
-            {public_metrics.like_count} likes
-          </p>
-
-          <p className="card-text retweets-count">
-            {public_metrics.retweet_count} retweets
-          </p>
+          <span className="likes">
+            <i className="bi bi-heart">
+              {""} {public_metrics.like_count}
+            </i>
+          </span>
+          <span className="spacer"></span>
+          <span className="retweets">
+            <i className="bi bi-repeat">
+              {""} {public_metrics.retweet_count}
+            </i>
+          </span>
         </div>
       </div>
     </>

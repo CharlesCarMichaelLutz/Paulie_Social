@@ -7,7 +7,7 @@ const Media = ({ mediaData }) => {
     <>
       <div>
         {type === "photo" && url && url.length > 0 && (
-          <img src={url} alt="tweet image" />
+          <img src={url} alt="image" className="media-element" />
         )}
 
         {(type === "animated_gif" || type === "video") &&
@@ -15,19 +15,17 @@ const Media = ({ mediaData }) => {
           Object.keys(variants).length > 0 && (
             <div>
               {type === "animated_gif" ? (
-                <video controls>
+                <video controls className="media-element">
                   <source
                     src={variants[Object.keys(variants)[0]].url}
                     type="video/mp4"
-                    alt="tweet gif"
                   />
                 </video>
               ) : (
-                <video controls>
+                <video controls className="media-element">
                   <source
                     src={variants[Object.keys(variants)[0]].url}
                     type="video/mp4"
-                    alt="tweet video"
                   />
                 </video>
               )}
