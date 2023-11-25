@@ -1,0 +1,6 @@
+﻿namespace PaulieSocialWebApi.wwwroot.build.static.media
+{
+    public class bootstrap_icons
+    {
+    }
+}

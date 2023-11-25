@@ -1,6 +1,6 @@
 ﻿namespace PaulieSocialWebApi.Models.UserIdModel
 {
-    [Serializable]
+    //[Serializable]
     public class UserIdModel
     {
         public Data data { get; set; }

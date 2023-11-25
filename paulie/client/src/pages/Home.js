@@ -1,10 +1,14 @@
 import React from "react";
 import bigParrot from "../static/bigparrot.jpg";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <>
       <div class="container">
+        <Helmet>
+          <title>Paulie Social - Home</title>
+        </Helmet>
         <header className="home--header">
           <h1>Welcome to Paulie Social!</h1>
         </header>

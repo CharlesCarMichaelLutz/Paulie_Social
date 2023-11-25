@@ -48,6 +48,7 @@ namespace PaulieSocialWebApi.Models.TweetModel
     {
         public string username { get; set; }
         public string profile_image_url { get; set; }
+        public string id { get; set; }
     }
 }
 

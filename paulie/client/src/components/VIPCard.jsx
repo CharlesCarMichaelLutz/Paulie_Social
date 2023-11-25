@@ -1,7 +1,7 @@
 import React from "react";
 
 const VIPCard = ({ user, eventHandler }) => {
-  let { username, userhandle, userImage } = user;
+  let { userhandle, userImage } = user;
   return (
     <>
       <div className="container">

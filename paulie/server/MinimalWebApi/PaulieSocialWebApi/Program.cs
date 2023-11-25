@@ -16,10 +16,7 @@ var twitterApiKey = builder.Configuration["Twitter:bearerToken"];
 var services = builder.Services;
 
 services.AddScoped<ITweetService, TweetService>();
-
 services.AddAuthentication();
-//services.AddAuthorization();
-
 services.AddHttpClient<ITweetService, TweetService>(client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
@@ -38,7 +35,6 @@ services.AddSwaggerGen(c =>
         Version = "v1"
     });
 });
-
 
 services.AddCors(options =>
 {
@@ -62,7 +58,6 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-//app.UseAuthorization();
 app.UseAuthentication();
 
 app.UseHttpsRedirection();

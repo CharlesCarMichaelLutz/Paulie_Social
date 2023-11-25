@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Errors from "../components/Errors";
+import { findMediaForTweet, matchUserWithTweet } from "../helpers/Helpers";
 import TweetCard from "../components/TweetCard";
+import ExploreForm from "../components/ExploreForm";
+import { Helmet } from "react-helmet-async";
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [tweets, setTweets] = useState([]);
   const [radioButtonValue, setRadioButtonValue] = useState("username");
+  const [error, setError] = useState(null);
 
   useEffect(
     (tweets) => {
@@ -22,11 +27,13 @@ const Explore = () => {
 
   const onRadioButtonChange = (e) => {
     setRadioButtonValue(e.target.value);
-    setTweets([]);
+    setError(null);
   };
 
   const getTweets = async (e) => {
     e.preventDefault();
+    setTweets([]);
+    setError(null);
 
     if (searchTerm) {
       const apiEndpoint =
@@ -36,120 +43,65 @@ const Explore = () => {
 
       try {
         const response = await axios.get(apiEndpoint);
-        setTweets(response.data);
         console.log("search query: ", response.data);
+        if (response.data.length === 0) {
+          setError(
+            `${radioButtonValue} entered may be incorrect, please try again`
+          );
+        }
+        setTweets(response.data);
+        setError(null);
       } catch (error) {
-        console.log(error);
-        setTweets([]);
+        setError(error.message);
       } finally {
         setSearchTerm("");
-        //setRadioButtonValue(null)
       }
     }
   };
 
-  const findMediaForTweet = (tweet, mediaArray) => {
-    if (!tweet.attachments || !tweet.attachments.media_keys) {
-      return null;
-    }
-    const dataMediaKey = tweet.attachments.media_keys[0];
-    return mediaArray.find((media) => media.media_key === dataMediaKey);
-  };
+  const renderTweets = error ? (
+    <Errors message={error} />
+  ) : (
+    tweets.map((tweetObject) => {
+      const tweetData = tweetObject.data;
+      const userData = tweetObject.includes.users;
 
-  // const userWithMultipleTweets = (tweet, usersArray) => {
-  //   if(tweet.author_id.count() === 1) {
-  //     return tweet.author_id
-  //   }
-  //   const dataAuthorId = tweet.author_id
-  //   return usersArray.find((author) => author.id === dataAuthorId)
-  // }
+      const matchedData = matchUserWithTweet(tweetData, userData);
 
-  const renderTweets =
-    tweets.length === 0
-      ? ""
-      : tweets.map((tweetObject) =>
-          tweetObject.data.map((tweetData, dataIndex) => {
-            const mediaData = findMediaForTweet(
-              tweetData,
-              tweetObject.includes.media
-            );
+      return matchedData.map(({ tweet, user }, dataIndex) => {
+        const mediaData = findMediaForTweet(tweet, tweetObject.includes.media);
 
-            const userData =
-              radioButtonValue === "username"
-                ? tweetObject.includes.users[0]
-                : tweetObject.includes.users[dataIndex];
-
-            return (
-              <div className="render--explore">
-                <TweetCard
-                  key={dataIndex}
-                  tweetList={tweetData}
-                  mediaData={mediaData}
-                  users={userData}
-                />
-              </div>
-            );
-          })
+        return (
+          <div className="render--explore" key={dataIndex}>
+            <TweetCard
+              key={dataIndex}
+              tweetList={tweet}
+              mediaData={mediaData}
+              users={user}
+            />
+          </div>
         );
+      });
+    })
+  );
 
   return (
     <>
       <div className="container">
+        <Helmet>
+          <title>Paulie Social - Explore</title>
+        </Helmet>
         <header className="explore--header">
           <h1>Explore Tweets with Paulie Social</h1>
         </header>
 
-        <form onSubmit={getTweets}>
-          <section className="group--radio">
-            <div className="radio">
-              <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <label
-                  className={`btn btn-primary ${
-                    radioButtonValue === "username" ? "active" : ""
-                  } green-button`}
-                  htmlFor="button1"
-                >
-                  <input
-                    type="radio"
-                    value="username"
-                    id="button1"
-                    className="hidden-radio"
-                    checked={radioButtonValue === "username"}
-                    onChange={onRadioButtonChange}
-                  />
-                  Username
-                </label>
-                <label
-                  className={`btn btn-primary ${
-                    radioButtonValue === "content" ? "active" : ""
-                  } green-button`}
-                  htmlFor="button2"
-                >
-                  <input
-                    type="radio"
-                    value="content"
-                    id="button2"
-                    className="hidden-radio"
-                    checked={radioButtonValue === "content"}
-                    onChange={onRadioButtonChange}
-                  />
-                  Content
-                </label>
-              </div>
-            </div>
-          </section>
-
-          <input
-            placeholder="search...."
-            type="text"
-            className="search--bar"
-            value={searchTerm}
-            onChange={onInputChange}
-          />
-          <button type="submit" className="submit--button">
-            Get Tweets
-          </button>
-        </form>
+        <ExploreForm
+          getTweets={getTweets}
+          radioButtonValue={radioButtonValue}
+          onRadioButtonChange={onRadioButtonChange}
+          searchTerm={searchTerm}
+          onInputChange={onInputChange}
+        />
 
         <div className="list-container">
           <div className="row justify-content-center">

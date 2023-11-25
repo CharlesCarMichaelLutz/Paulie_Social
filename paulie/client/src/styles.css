@@ -344,3 +344,10 @@ VIP Cards
   text-align: center;
   border: 1px solid #999;
 }
+
+.error {
+  background-color: none;
+  color: red;
+  font-size: larger;
+  font-weight: bolder;
+}
