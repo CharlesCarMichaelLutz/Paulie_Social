@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PaulieSocialWebApi.Models.TweetModel;
-using PaulieSocialWebApi.Models.UserIdModel;
+using PaulieSocialWebApi.Models;
 using System;
 using System.Collections.Immutable;
 using System.Reflection.Metadata.Ecma335;
@@ -116,7 +115,7 @@ namespace PaulieSocialWebApi.Repositories.TweetRepository
 
             TweetData selectedTweetData = tweetResponse.Data[getIndexOfRandomTweet];
 
-            includes select = tweetResponse.Includes;
+            Includes select = tweetResponse.Includes;
 
 
             TweetModel selectedTweet = new TweetModel

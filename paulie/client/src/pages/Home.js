@@ -1,5 +1,6 @@
 import React from "react";
 import bigParrot from "../static/bigparrot.jpg";
+//import bigParrot from "../parrot2.JPG";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {

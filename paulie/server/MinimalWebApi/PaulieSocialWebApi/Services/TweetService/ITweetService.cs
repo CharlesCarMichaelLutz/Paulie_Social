@@ -1,4 +1,4 @@
-﻿using PaulieSocialWebApi.Models.TweetModel;
+﻿using PaulieSocialWebApi.Models;
 
 namespace PaulieSocialWebApi.Repositories.TweetRepository
 {

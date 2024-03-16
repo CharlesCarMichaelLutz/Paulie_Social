@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "q4Qn+PXBj4ZnvLJBoCs+B/VWZUdNeAFcHBxmqtJS5ZI=",
+  "Hash": "7rBbD4bBg/sKvBKzUdmJ3bUdw6B39W6R+3ZM1m4+rIY=",
   "Source": "PaulieSocialWebApi",
   "BasePath": "_content/PaulieSocialWebApi",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\css\\main.2f564396.css",
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\css\\main.58c30375.css",
       "SourceId": "PaulieSocialWebApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
       "BasePath": "_content/PaulieSocialWebApi",
-      "RelativePath": "build/static/css/main.2f564396.css",
+      "RelativePath": "build/static/css/main.58c30375.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,15 +31,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\build\\static\\css\\main.2f564396.css"
+      "OriginalItemSpec": "wwwroot\\build\\static\\css\\main.58c30375.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\js\\main.35d446cc.js",
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\js\\main.4364b7b9.js",
       "SourceId": "PaulieSocialWebApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
       "BasePath": "_content/PaulieSocialWebApi",
-      "RelativePath": "build/static/js/main.35d446cc.js",
+      "RelativePath": "build/static/js/main.4364b7b9.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,7 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\build\\static\\js\\main.35d446cc.js"
+      "OriginalItemSpec": "wwwroot\\build\\static\\js\\main.4364b7b9.js"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\bigparrot.e4c92d0f8fc90b9c43d9.jpg",
@@ -66,6 +66,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\build\\static\\media\\bigparrot.e4c92d0f8fc90b9c43d9.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\bootstrap-icons.449ad8adf6ae0424b7ed.woff",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "build/static/media/bootstrap-icons.449ad8adf6ae0424b7ed.woff",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\build\\static\\media\\bootstrap-icons.449ad8adf6ae0424b7ed.woff"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\bootstrap-icons.dea24bf5a7646d8b84e7.woff2",
+      "SourceId": "PaulieSocialWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\",
+      "BasePath": "_content/PaulieSocialWebApi",
+      "RelativePath": "build/static/media/bootstrap-icons.dea24bf5a7646d8b84e7.woff2",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\build\\static\\media\\bootstrap-icons.dea24bf5a7646d8b84e7.woff2"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\sdmm\\Twitter\\paulie\\server\\MinimalWebApi\\PaulieSocialWebApi\\wwwroot\\build\\static\\media\\parrot1.248af7cfd8ccc2363a11.jpg",

@@ -345,7 +345,7 @@ nav {
  */ @font-face {
     font-display: block;
     font-family: bootstrap-icons;
-    src: url(/static/media/bootstrap-icons.dea24bf5a7646d8b84e7.woff2) format("woff2"),url(/static/media/bootstrap-icons.449ad8adf6ae0424b7ed.woff) format("woff")
+    src: url(/build/static/media/bootstrap-icons.dea24bf5a7646d8b84e7.woff2) format("woff2"),url(/build/static/media/bootstrap-icons.449ad8adf6ae0424b7ed.woff) format("woff")
 }
 
 .bi:before, [class*=" bi-"]:before, [class^=bi-]:before {
