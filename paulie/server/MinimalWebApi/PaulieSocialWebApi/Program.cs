@@ -1,14 +1,5 @@
 using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.AspNetCore.Mvc;
 using PaulieSocialWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);

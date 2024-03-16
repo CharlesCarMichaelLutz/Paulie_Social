@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PaulieSocialWebApi.Models;
+using System.Net.Mail;
+using System.Web;
 
 namespace PaulieSocialWebApi.Services
 {
@@ -17,12 +19,20 @@ namespace PaulieSocialWebApi.Services
         }
         public async Task<IEnumerable<TweetModel>> GetTweetsByContent(string searchTerm)
         {
-            List<TweetModel> tweets = new List<TweetModel>();
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}tweets/search/recent");
+            builder.Port = -1;
+            var queryStrings = HttpUtility.ParseQueryString(builder.Query);
+            queryStrings["query"] = searchTerm;
+            queryStrings["tweet.fields"] = "attachments,author_id,public_metrics,source";
+            queryStrings["expansions"] = "attachments.media_keys,author_id";
+            queryStrings["media.fields"] = "url,variants,media_key,type";
+            queryStrings["user.fields"] = "profile_image_url";
+            queryStrings["max_results"] = "15";
+            builder.Query = queryStrings.ToString();
+            var url = builder.ToString();
 
-            var endpoint = $"tweets/search/recent?query={searchTerm}";
-            var parameters = $"{endpoint}&tweet.fields=attachments,author_id,public_metrics,source&expansions=attachments.media_keys,author_id&media.fields=url,variants,media_key,type&user.fields=profile_image_url&max_results=15";
 
-            HttpResponseMessage response = await _httpClient.GetAsync(parameters).ConfigureAwait(false);
+            HttpResponseMessage response = await _httpClient.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -36,6 +46,8 @@ namespace PaulieSocialWebApi.Services
             {
                 throw new NullReferenceException();
             }
+
+            var tweets = new List<TweetModel>();
 
             tweets.Add(model);
 
