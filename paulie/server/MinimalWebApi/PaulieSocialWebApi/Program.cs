@@ -1,4 +1,3 @@
-using PaulieSocialWebApi.Repositories.TweetRepository;
 using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
 using Microsoft.IdentityModel.Tokens;
@@ -10,12 +9,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
+using PaulieSocialWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var twitterApiKey = builder.Configuration["Twitter:bearerToken"];
 var services = builder.Services;
 
 services.AddScoped<ITweetService, TweetService>();
+services.AddScoped<IRandomTweetService, RandomTweetService>();
 services.AddAuthentication();
 services.AddHttpClient<ITweetService, TweetService>(client =>
 {
@@ -83,9 +84,9 @@ app.UseEndpoints(endpoints =>
         });
 
     endpoints.MapGet("/api/randomVip/{id}",
-        async (ITweetService tweetService, string id) =>
+        async (IRandomTweetService randomTweetService, string id) =>
         {
-            var result = await tweetService.GetRandomVipTweet(id);
+            var result = await randomTweetService.GetRandomVipTweet(id);
             return Results.Ok(result);
         });
 
