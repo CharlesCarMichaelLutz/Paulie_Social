@@ -31,27 +31,26 @@ namespace PaulieSocialWebApi.Services
             builder.Query = queryStrings.ToString();
             var url = builder.ToString();
 
-
-            HttpResponseMessage response = await _httpClient.GetAsync(url).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception(response.ReasonPhrase);
             }
 
-            string jsonString = await response.Content.ReadAsStringAsync();
-            var model = JsonConvert.DeserializeObject<TweetModel>(jsonString);
+            var json = await response.Content.ReadAsStringAsync();
+
+            var model = JsonConvert.DeserializeObject<TweetModel>(json);
 
             if (model is null)
             {
                 throw new NullReferenceException();
             }
 
-            var tweets = new List<TweetModel>();
-
-            tweets.Add(model);
-
-            return tweets;
+            return new List<TweetModel>
+            {
+                model
+            };
         }
         public async Task<IEnumerable<TweetModel>> GetTweetsByUsername(string username)
         {
