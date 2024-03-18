@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
 using PaulieSocialWebApi.Services;
+using PaulieSocialWebApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var twitterApiKey = builder.Configuration["Twitter:bearerToken"];
@@ -10,6 +11,14 @@ services.AddScoped<ITweetService, TweetService>();
 services.AddScoped<IRandomTweetService, RandomTweetService>();
 services.AddAuthentication();
 services.AddHttpClient<ITweetService, TweetService>(client =>
+{
+    client.DefaultRequestHeaders.Accept.Clear();
+    client.BaseAddress = new Uri("https://api.twitter.com/2/");
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", twitterApiKey);
+});
+
+services.AddHttpClient<IRandomTweetService, RandomTweetService>(client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
     client.BaseAddress = new Uri("https://api.twitter.com/2/");
@@ -64,14 +73,14 @@ app.UseEndpoints(endpoints =>
         async (ITweetService tweetService, string searchTerm) =>
         {
             var result = await tweetService.GetTweetsByContent(searchTerm);
-            return Results.Ok(result);
+            return Results.Ok(new List<TweetModel> { result });
         });
 
     endpoints.MapGet("/api/explore/{username}",
         async (ITweetService tweetService, string username) =>
         {
             var result = await tweetService.GetTweetsByUsername(username);
-            return Results.Ok(result);
+            return Results.Ok(new List<TweetModel> { result });
         });
 
     endpoints.MapGet("/api/randomVip/{id}",
