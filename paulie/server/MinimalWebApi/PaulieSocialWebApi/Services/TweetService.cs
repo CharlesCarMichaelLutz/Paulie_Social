@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PaulieSocialWebApi.Extensions;
 using PaulieSocialWebApi.Models;
 using System.Net.Mail;
 using System.Web;
@@ -7,8 +8,8 @@ namespace PaulieSocialWebApi.Services
 {
     public interface ITweetService
     {
-        Task<IEnumerable<TweetModel>> GetTweetsByContent(string searchTerm);
-        Task<IEnumerable<TweetModel>> GetTweetsByUsername(string username);
+        Task<TweetModel> GetTweetsByContent(string searchTerm);
+        Task<TweetModel> GetTweetsByUsername(string username);
     }
     public class TweetService : ITweetService
     {
@@ -17,7 +18,7 @@ namespace PaulieSocialWebApi.Services
         {
             _httpClient = httpClient;
         }
-        public async Task<IEnumerable<TweetModel>> GetTweetsByContent(string searchTerm)
+        public async Task<TweetModel> GetTweetsByContent(string searchTerm)
         {
             var builder = new UriBuilder($"{_httpClient.BaseAddress}tweets/search/recent");
             builder.Port = -1;
@@ -33,33 +34,14 @@ namespace PaulieSocialWebApi.Services
 
             var response = await _httpClient.GetAsync(url).ConfigureAwait(false);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            var json = await response.Content.ReadAsStringAsync();
-
-            var model = JsonConvert.DeserializeObject<TweetModel>(json);
-
-            if (model is null)
-            {
-                throw new NullReferenceException();
-            }
-
-            return new List<TweetModel>
-            {
-                model
-            };
+            return await response.DeserializeOrThrow();
         }
-        public async Task<IEnumerable<TweetModel>> GetTweetsByUsername(string username)
+        public async Task<TweetModel> GetTweetsByUsername(string username)
         {
             var userIdRequest = await _httpClient.GetAsync($"users/by/username/{username.Trim()}").ConfigureAwait(false);
 
             var idJson = await userIdRequest.Content.ReadAsStringAsync();
             var user = JsonConvert.DeserializeObject<UserIdModel>(idJson);
-
-            //TODO - create query string for GetTweetsByUsername method request
 
             var builder = new UriBuilder($"{_httpClient.BaseAddress}users/{user.data.id}/tweets");
             builder.Port = -1;
@@ -74,24 +56,7 @@ namespace PaulieSocialWebApi.Services
 
             var response = await _httpClient.GetAsync(url).ConfigureAwait(false);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            var json = await response.Content.ReadAsStringAsync();
-
-            var tweetList = JsonConvert.DeserializeObject<TweetModel>(json);
-
-            if (tweetList is null)
-            {
-                throw new NullReferenceException();
-            }
-
-            return new List<TweetModel>
-            { 
-                tweetList
-            };
+            return await response.DeserializeOrThrow();
         }
     }
 }
