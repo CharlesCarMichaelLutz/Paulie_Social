@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using PaulieSocialWebApi.Extensions;
+﻿using PaulieSocialWebApi.Extensions;
 using PaulieSocialWebApi.Models;
 using System.Web;
 
@@ -13,10 +12,12 @@ namespace PaulieSocialWebApi.Services
     public class RandomTweetService : IRandomTweetService
     {
         private readonly HttpClient _httpClient;
-        public RandomTweetService(HttpClient httpClient)
+
+        public RandomTweetService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("TwitterClient");
         }
+
         public async Task<TweetModel> GetRandomVipTweet(string id)
         {
             var builder = new UriBuilder($"{_httpClient.BaseAddress}users/{id}/tweets");

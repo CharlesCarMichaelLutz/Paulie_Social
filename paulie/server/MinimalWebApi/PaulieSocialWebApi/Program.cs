@@ -7,10 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 var twitterApiKey = builder.Configuration["Twitter:bearerToken"];
 var services = builder.Services;
 
-services.AddScoped<ITweetService, TweetService>();
-services.AddScoped<IRandomTweetService, RandomTweetService>();
 services.AddAuthentication();
-services.AddHttpClient<ITweetService, TweetService>(client =>
+
+services.AddHttpClient("TwitterClient", client =>
 {
     client.DefaultRequestHeaders.Accept.Clear();
     client.BaseAddress = new Uri("https://api.twitter.com/2/");
@@ -18,13 +17,8 @@ services.AddHttpClient<ITweetService, TweetService>(client =>
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", twitterApiKey);
 });
 
-services.AddHttpClient<IRandomTweetService, RandomTweetService>(client =>
-{
-    client.DefaultRequestHeaders.Accept.Clear();
-    client.BaseAddress = new Uri("https://api.twitter.com/2/");
-    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", twitterApiKey);
-});
+services.AddScoped<ITweetService, TweetService>();
+services.AddScoped<IRandomTweetService, RandomTweetService>();
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(c =>

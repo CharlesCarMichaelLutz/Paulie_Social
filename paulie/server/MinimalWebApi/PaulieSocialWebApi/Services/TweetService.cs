@@ -14,9 +14,9 @@ namespace PaulieSocialWebApi.Services
     public class TweetService : ITweetService
     {
         private readonly HttpClient _httpClient;
-        public TweetService(HttpClient httpClient)
+        public TweetService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("TwitterClient");
         }
         public async Task<TweetModel> GetTweetsByContent(string searchTerm)
         {
