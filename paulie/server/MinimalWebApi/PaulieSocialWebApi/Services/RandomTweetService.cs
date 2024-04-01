@@ -22,11 +22,7 @@ namespace PaulieSocialWebApi.Services
             var builder = new UriBuilder($"{_httpClient.BaseAddress}users/{id}/tweets");
             builder.Port = -1;
             var queryStrings = HttpUtility.ParseQueryString(builder.Query);
-            queryStrings["tweet.fields"] = "attachments,author_id,public_metrics,source";
-            queryStrings["expansions"] = "attachments.media_keys,author_id";
-            queryStrings["media.fields"] = "url,variants,media_key,type";
-            queryStrings["user.fields"] = "profile_image_url";
-            queryStrings["max_results"] = "15";
+            queryStrings.AddStandardTwitterQueryStrings();
             queryStrings["exclude"] = "retweets,replies";
             builder.Query = queryStrings.ToString();
             var url = builder.ToString();
