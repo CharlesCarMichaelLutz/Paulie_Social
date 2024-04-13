@@ -13,8 +13,8 @@ const TweetCard = ({
         <div className="card-header">
           <img
             src={profile_image_url}
-            alt="user image avatar"
             className="avatar"
+            alt="avatar for user"
           />
           <h4 className="card-title">{username}</h4>
         </div>

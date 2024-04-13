@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-//import parrot1 from "./static/parrot1.jpg";
-import parrot1 from "../static/parrot1.jpg";
 
 const Navbar = () => {
   return (
     <>
       <nav className="nav">
-        <img className="navbar--avatar" src={parrot1} alt="avatar image" />
+        <img src="/parrot1.jpg" className="navbar--avatar" alt="paulie logo" />
         <h1>Paulie Social</h1>
         <ul>
           <li>

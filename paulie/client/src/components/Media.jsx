@@ -7,7 +7,7 @@ const Media = ({ mediaData }) => {
     <>
       <div>
         {type === "photo" && url && url.length > 0 && (
-          <img src={url} alt="image" className="media-element" />
+          <img src={url} className="media-element" alt="media" />
         )}
 
         {(type === "animated_gif" || type === "video") &&
