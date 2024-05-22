@@ -2,7 +2,7 @@
 
 A Single Page Application built with a React JS frontend, and C# web api server that queries the X (formerly Twitter) API for data.
 
-#### check it out [here]()
+#### check it out [here](https://pauliesocialwebapi20240511111452.azurewebsites.net/)
 
 
 ----------
