@@ -28,4 +28,4 @@ different data structures that need to be called with separate methods. On the b
         "Twitter:bearerToken": "PASTE API KEY HERE"
 
 ### Author
-* __Charles Lutz__ - *Full-Stack Software Developer* - [Personal Website](https://master--resplendent-cocada-4ee40d.netlify.app/) | [LinkedIn](https://www.linkedin.com/in/CharlesCarMichaelLutz)
+* __Charles Lutz__ - *Full-Stack Software Developer* - [Personal Website](https://charlescarmichaellutz.github.io/) | [LinkedIn](https://www.linkedin.com/in/CharlesCarMichaelLutz)
